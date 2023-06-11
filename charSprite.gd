@@ -8,12 +8,10 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	print_debug(self.rotation_degrees)
-	print_debug(get_parent().rotation_degrees)
 	var parent = get_parent()
 	if abs(parent.rotation_degrees) <90:
-		self.flip_v = false;
-	else:
 		self.flip_v = true;
+	else:
+		self.flip_v = false;
 	
 	pass
