@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://nbx08cbonuko"]
+
+[ext_resource type="Texture2D" uid="uid://c0uyhlpa6fm78" path="res://assets/kenney_tiny-dungeon/Tiles/tile_0060.png" id="1_72kes"]
+
+[node name="Dropoff" type="Node"]
+
+[node name="Marker" type="Sprite2D" parent="."]
+texture_filter = 3
+texture = ExtResource("1_72kes")

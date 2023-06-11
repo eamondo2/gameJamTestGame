@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://cbltmbf2fimns"]
+
+[ext_resource type="Script" path="res://courier.gd" id="1_aadlf"]
+[ext_resource type="Script" path="res://charSprite.gd" id="3_utpyi"]
+
+[sub_resource type="Curve2D" id="Curve2D_ie2mb"]
+resource_local_to_scene = true
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_gpy40"]
+load_path = "res://.godot/imported/tile_0099.png-5d528b45d92d455ccf82df553919ad7a.ctex"
+
+[node name="Courier" type="Path2D"]
+curve = SubResource("Curve2D_ie2mb")
+script = ExtResource("1_aadlf")
+
+[node name="spriteFollow" type="PathFollow2D" parent="."]
+
+[node name="personSprite" type="Sprite2D" parent="spriteFollow"]
+texture_filter = 3
+texture = SubResource("CompressedTexture2D_gpy40")
+script = ExtResource("3_utpyi")
+
+[connection signal="texture_changed" from="spriteFollow/personSprite" to="." method="_on_person_sprite_texture_changed"]
