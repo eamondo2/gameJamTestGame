@@ -18,14 +18,8 @@ extends Path2D
 @export var speedScale = 1;
 
 
-@export var pointList: Array[Dropoff] = []
-	#set(value):
-	#	print(pointList)
-	#	print(value);
-	#	pointList = value
-	#	print("listchange")
-
-var startPos: Vector2
+@export var pointList: Array[Dropoff] = [];
+		
 
 func _run():
 	print("EditorfnRun");
@@ -34,13 +28,18 @@ func _run():
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	print("readycallback")
-	self.startPos = self.position;
 	self.progress_ratio = self.progress_ratio;
 	pass # Replace with function body.
 
 func _process(delta):
 	if !Engine.is_editor_hint():
 		self.progress_ratio += speedScale * 0.05 * delta;
+	else:
+		self.curve.clear_points()
+		self.curve.add_point(Vector2(0,0))
+		for d in self.pointList:
+			self.curve.add_point(d.position - self.position)
+		self.curve.add_point(Vector2.ZERO)
 	pass
 
 

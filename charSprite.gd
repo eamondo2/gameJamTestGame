@@ -10,8 +10,8 @@ func _ready():
 func _process(delta):
 	var parent = get_parent()
 	if abs(parent.rotation_degrees) <90:
-		self.flip_v = true;
-	else:
 		self.flip_v = false;
+	else:
+		self.flip_v = true;
 	
 	pass

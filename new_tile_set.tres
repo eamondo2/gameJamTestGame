@@ -282,6 +282,7 @@ texture = ExtResource("2_cgql7")
 terrain_set_0/mode = 0
 terrain_set_0/terrain_0/name = "Terrain 0"
 terrain_set_0/terrain_0/color = Color(0.501961, 0.345098, 0.25098, 1)
+navigation_layer_0/layers = 1
 sources/0 = SubResource("TileSetAtlasSource_y64av")
 sources/1 = SubResource("TileSetAtlasSource_d121b")
 pattern_0 = SubResource("TileMapPattern_bmkuh")

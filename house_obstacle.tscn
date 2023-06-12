@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://bwotx8wfrb2u6"]
+
+[ext_resource type="TileSet" uid="uid://brp8lp0odh2rm" path="res://new_tile_set.tres" id="1_btey4"]
+
+[node name="HouseObstacle" type="Node2D"]
+
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="."]
+vertices = PackedVector2Array(48, 48, 0, 48, 0, 0, 48, 0)
+
+[node name="TileMap" type="TileMap" parent="."]
+texture_filter = 1
+tile_set = ExtResource("1_btey4")
+collision_visibility_mode = 1
+navigation_visibility_mode = 1
+format = 2
+layer_0/tile_data = PackedInt32Array(0, 1, 4, 65536, 1, 5, 131072, 1, 6, 1, 65537, 4, 65537, 196609, 5, 131073, 65537, 7, 2, 131073, 4, 65538, 131073, 5, 131074, 196609, 6)

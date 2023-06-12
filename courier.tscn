@@ -5,6 +5,10 @@
 
 [sub_resource type="Curve2D" id="Curve2D_ie2mb"]
 resource_local_to_scene = true
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+}
+point_count = 2
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_gpy40"]
 load_path = "res://.godot/imported/tile_0099.png-5d528b45d92d455ccf82df553919ad7a.ctex"
