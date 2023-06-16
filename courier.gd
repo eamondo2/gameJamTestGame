@@ -18,7 +18,7 @@ extends Path2D
 @export var speedScale = 1;
 
 
-@export var pointList: Array[Dropoff] = [];
+@export var pointList: Array[Node2D] = [];
 		
 
 func _run():
