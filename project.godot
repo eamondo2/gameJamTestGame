@@ -24,4 +24,4 @@ window/stretch/scale=2.0
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/roadBuilder/plugin.cfg")
+enabled=PackedStringArray("res://addons/courierEditor/plugin.cfg", "res://addons/roadBuilder/plugin.cfg")

@@ -1,21 +1,21 @@
 @tool
 extends EditorPlugin
 
-
-# A class member to hold the dock during the plugin life cycle.
-var dock
 var roadmap: RoadMap
 var selectedNode: Intersection
 var dragging: bool = false
 var oldPosition: Vector2
 
 func _enter_tree():
-	# Initialization of the plugin goes here.
-	# Load the dock scene and instantiate it.
 	add_custom_type("RoadMap", "Node2D", preload("res://addons/roadBuilder/roadMap.gd"), preload("res://addons/roadBuilder/icon.svg"))
 	add_custom_type("Intersection", "Sprite2D", preload("res://addons/roadBuilder/intersection.gd"), preload("res://addons/roadBuilder/icon.svg"))
 	add_custom_type("Dropoff", "Sprite2D", preload("res://addons/roadBuilder/dropoff.gd"), preload("res://addons/roadBuilder/icon.svg"))
 
+func _exit_tree():
+	remove_custom_type("RoadMap")
+	remove_custom_type("Intersection")
+	remove_custom_type("Dropoff")
+	
 func setRoadMap(roadMap: RoadMap):
 	self.roadmap = roadMap
 	
@@ -28,7 +28,6 @@ func reset():
 		roadmap.reset()
 		
 func _handles(object: Object):
-	# Ok, this might actually be what we want, but I'm gonna hold off on doing it right for now
 	if object is RoadMap:
 		roadmap = object
 		return true
@@ -74,13 +73,9 @@ func _forward_canvas_gui_input(event):
 				dragging = false
 		elif event is InputEventMouseMotion and selectedNode != null and dragging:
 			roadmap.moveNode(selectedNode, localPosition)
+		# Do consume input
 		return true
 	else:
+		# Don't consume input
 		return false
 
-func _exit_tree():
-	# Clean-up of the plugin goes here.
-	# Remove the dock.
-	remove_control_from_docks(dock)
-	# Erase the control from the memory.
-	dock.free()
