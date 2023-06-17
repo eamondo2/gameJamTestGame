@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://clp24tl3ra8a7"]
-
-[ext_resource type="Script" path="res://addons/roadBuilder/intersection.gd" id="1_cb4wb"]
-[ext_resource type="Texture2D" uid="uid://dkkv028dygv4u" path="res://addons/roadBuilder/signpost.png" id="1_nuiw1"]
-
-[node name="Intersection" type="Sprite2D"]
-texture = ExtResource("1_nuiw1")
-script = ExtResource("1_cb4wb")

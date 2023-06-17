@@ -1,8 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://bsmvphpuud7mw"]
-
-[ext_resource type="Texture2D" uid="uid://cdylonkmnftv5" path="res://addons/roadBuilder/bag.png" id="1_2w8dj"]
-[ext_resource type="Script" path="res://addons/roadBuilder/dropoff.gd" id="2_jbve6"]
-
-[node name="Dropoff" type="Sprite2D"]
-texture = ExtResource("1_2w8dj")
-script = ExtResource("2_jbve6")
