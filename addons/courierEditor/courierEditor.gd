@@ -29,6 +29,7 @@ func _handles(object: Object):
 			return true
 		else:
 			print('Must have a RoadMap to edit Courier paths')
+	
 	return false
 	
 func _forward_canvas_gui_input(event):

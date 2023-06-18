@@ -11,6 +11,8 @@ var math
 var changed = false
 var simpleConnections: Array[Variant] = []
 
+@export var couriers: Array[Courier] = []
+
 const INTERACTION_DISTANCE = 10
 
 func _enter_tree():
@@ -19,6 +21,11 @@ func _enter_tree():
 			print('Please only use 1 roadmap per scene')
 			self.queue_free()
 	self.add_to_group('roadmap', true)
+	self.couriers = []
+	for cChild in self.get_children(true):
+		if cChild is Courier and !self.couriers.any(func(c): return !self.couriers.has(c)):
+			self.couriers.append(cChild)
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

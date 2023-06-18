@@ -13,9 +13,10 @@ point_count = 2
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_gpy40"]
 load_path = "res://.godot/imported/tile_0099.png-5d528b45d92d455ccf82df553919ad7a.ctex"
 
-[node name="Courier" type="Path2D"]
+[node name="Courier" type="Path2D" groups=["courier"]]
 curve = SubResource("Curve2D_ie2mb")
 script = ExtResource("1_ltfii")
+progress_ratio = 1.07992
 
 [node name="spriteFollow" type="PathFollow2D" parent="."]
 
