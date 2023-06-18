@@ -16,7 +16,10 @@ load_path = "res://.godot/imported/tile_0099.png-5d528b45d92d455ccf82df553919ad7
 [node name="Courier" type="Path2D" groups=["courier"]]
 curve = SubResource("Curve2D_ie2mb")
 script = ExtResource("1_ltfii")
+sprite = null
 progress_ratio = 1.07992
+nodeColor = Color(1, 0, 0, 1)
+speedScale = 1
 
 [node name="spriteFollow" type="PathFollow2D" parent="."]
 
