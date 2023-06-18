@@ -1,10 +1,10 @@
 @tool
 class_name Courier
-extends Path2D
+extends Node2D
 
 @export var sprite: Texture2D:
 	set(value):
-		var spriteNode: Sprite2D = get_node("spriteFollow/personSprite");
+		var spriteNode: Sprite2D = get_node("Path/spriteFollow/personSprite");
 		spriteNode.texture = value;
 		sprite = value;
 		#notify_property_list_changed()
@@ -12,7 +12,7 @@ extends Path2D
 @export_range(0, 1, .01) var progress_ratio: float:
 	set(value):
 		progress_ratio = value;
-		get_node("spriteFollow").progress_ratio = value;
+		get_node("Path/spriteFollow").progress_ratio = value;
 		#notify_property_list_changed()
 
 @export_color_no_alpha var nodeColor: Color = Color.RED
@@ -54,6 +54,7 @@ func removeNode(node: Intersection):
 	return false
 			
 func redoPath(roadmap: RoadMap):
+	var curveObj = self.get_node("Path")
 	if requiredNodes.size() > 0:
 		var path: Array[Intersection] = []
 		var previousNode
@@ -66,12 +67,12 @@ func redoPath(roadmap: RoadMap):
 			previousNode = n
 		# Connect end to start
 		path.append_array(roadmap.findPath(requiredNodes[-1], requiredNodes[0]))
-		self.curve.clear_points()
+		curveObj.curve.clear_points()
 		for n in path:
-			self.curve.add_point(roadmap.to_local(n.position+Vector2(PATH_WIGGLE*randf(), PATH_WIGGLE*randf())))
+			curveObj.curve.add_point(roadmap.to_local(n.position+Vector2(PATH_WIGGLE*randf(), PATH_WIGGLE*randf())))
 			
 		totalNodes = path
 	else:
 		totalNodes = []
-		self.curve.clear_points()
+		curveObj.curve.clear_points()
 	queue_redraw()
