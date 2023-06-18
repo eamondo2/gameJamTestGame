@@ -1,6 +1,17 @@
-[gd_scene load_steps=2 format=3 uid="uid://c204ohwgc2lbf"]
+[gd_scene load_steps=7 format=3 uid="uid://c204ohwgc2lbf"]
 
 [ext_resource type="TileSet" uid="uid://brp8lp0odh2rm" path="res://new_tile_set.tres" id="2_iupoa"]
+[ext_resource type="Script" path="res://addons/roadBuilder/roadMap.gd" id="2_jbyh1"]
+[ext_resource type="Script" path="res://addons/roadBuilder/intersection.gd" id="4_2lt7v"]
+[ext_resource type="Texture2D" uid="uid://dkkv028dygv4u" path="res://addons/roadBuilder/signpost.png" id="5_jai35"]
+[ext_resource type="PackedScene" uid="uid://dlevjsmnm25f2" path="res://addons/courierEditor/courier.tscn" id="8_r88pd"]
+
+[sub_resource type="Curve2D" id="Curve2D_0s6ho"]
+resource_local_to_scene = true
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 396.298, 188.097, 0, 0, 0, 0, 418.389, 194, 0, 0, 0, 0, 400.47, 194.735, 0, 0, 0, 0, 583.361, 183.655, 0, 0, 0, 0, 588.405, 176.765, 0, 0, 0, 0, 567.625, 180.204, 0, 0, 0, 0, 578.365, 177.961, 0, 0, 0, 0, 582.859, 168.364, 0, 0, 0, 0, 774.095, 188.675, 0, 0, 0, 0, 795.508, 186.755, 0, 0, 0, 0, 796.95, 187.469, 0, 0, 0, 0, 729.755, 275.223, 0, 0, 0, 0, 708.17, 266.939, 0, 0, 0, 0, 599.65, 340.348, 0, 0, 0, 0, 600.238, 347.231, 0, 0, 0, 0, 594.53, 340.37, 0, 0, 0, 0, 481.61, 277.122, 0, 0, 0, 0, 410.227, 184.38)
+}
+point_count = 18
 
 [node name="Node2D" type="Node2D"]
 
@@ -16,3 +27,43 @@ layer_0/tile_data = PackedInt32Array(851997, 65537, 0, 917533, 65537, 0, 983069,
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(661, 330)
 scale = Vector2(0.25, 0.25)
+
+[node name="RoadMap" type="Node2D" parent="." node_paths=PackedStringArray("nodes") groups=["roadmap"]]
+script = ExtResource("2_jbyh1")
+defaultConnectionLength = 500.0
+nodes = [NodePath("@Sprite2D@25020"), NodePath("@Sprite2D@25021"), NodePath("@Sprite2D@25022"), NodePath("@Sprite2D@25023"), NodePath("@Sprite2D@25024"), NodePath("@Sprite2D@25025")]
+connections = Array[Array]([[false, false, false, true, true, false], [false, false, false, true, false, true], [false, false, false, true, true, true], [true, true, true, false, true, true], [true, false, true, true, false, false], [false, true, true, true, false, false]])
+
+[node name="@Sprite2D@25020" type="Sprite2D" parent="RoadMap"]
+position = Vector2(394.901, 173.796)
+texture = ExtResource("5_jai35")
+script = ExtResource("4_2lt7v")
+
+[node name="@Sprite2D@25021" type="Sprite2D" parent="RoadMap"]
+position = Vector2(773.069, 167.85)
+texture = ExtResource("5_jai35")
+script = ExtResource("4_2lt7v")
+
+[node name="@Sprite2D@25022" type="Sprite2D" parent="RoadMap"]
+position = Vector2(581.607, 340.285)
+texture = ExtResource("5_jai35")
+script = ExtResource("4_2lt7v")
+
+[node name="@Sprite2D@25023" type="Sprite2D" parent="RoadMap"]
+position = Vector2(564.958, 166.066)
+texture = ExtResource("5_jai35")
+script = ExtResource("4_2lt7v")
+
+[node name="@Sprite2D@25024" type="Sprite2D" parent="RoadMap"]
+position = Vector2(460.308, 270.716)
+texture = ExtResource("5_jai35")
+script = ExtResource("4_2lt7v")
+
+[node name="@Sprite2D@25025" type="Sprite2D" parent="RoadMap"]
+position = Vector2(705.879, 257.635)
+texture = ExtResource("5_jai35")
+script = ExtResource("4_2lt7v")
+
+[node name="Courier" parent="RoadMap" instance=ExtResource("8_r88pd")]
+curve = SubResource("Curve2D_0s6ho")
+progress_ratio = 3.52802

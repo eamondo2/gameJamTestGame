@@ -61,7 +61,7 @@ func removeNode(node: Intersection):
 			
 func redoPath(roadmap: RoadMap):
 	if requiredNodes.size() > 0:
-		var path = []
+		var path: Array[Intersection] = []
 		var previousNode
 		for n in requiredNodes:
 			if previousNode != null:

@@ -9,14 +9,15 @@ extends Node2D
 @export var connections: Array[Array] = []
 var math
 var changed = false
-var simpleConnections: Array[Array] = []
+var simpleConnections: Array[Variant] = []
 
 const INTERACTION_DISTANCE = 10
 
 func _enter_tree():
 	if get_tree().has_group("roadmap"):
-		print('Please only use 1 roadmap per scene')
-		self.queue_free()
+		if get_tree().get_nodes_in_group('roadmap').any(func(v): return v != self):
+			print('Please only use 1 roadmap per scene')
+			self.queue_free()
 	self.add_to_group('roadmap', true)
 
 # Called when the node enters the scene tree for the first time.
@@ -160,7 +161,9 @@ func switchType(node: Intersection):
 	
 # This will return a list of nodes, exclusive on the first step, inclusive on the last
 func findPath(node1: Intersection, node2: Intersection):
+	
 	if changed:
+		
 		simpleConnections = math.simplifyGraph(connections)
 		changed = false
 	var index1 = -1

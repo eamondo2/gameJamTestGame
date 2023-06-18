@@ -6,6 +6,7 @@ var selectedNode: Intersection
 var dragging: bool = false
 var oldPosition: Vector2
 
+
 func _enter_tree():
 	add_custom_type("RoadMap", "Node2D", preload("res://addons/roadBuilder/roadMap.gd"), preload("res://addons/roadBuilder/icon.svg"))
 	add_custom_type("Intersection", "Sprite2D", preload("res://addons/roadBuilder/intersection.gd"), preload("res://addons/roadBuilder/icon.svg"))
@@ -31,9 +32,18 @@ func _handles(object: Object):
 	if object is RoadMap:
 		roadmap = object
 		return true
+	if object is Intersection:
+		print('intersection select event')
+		self.selectedNode = object
+		return true
 	return false
 	
 func _forward_canvas_gui_input(event):
+	
+	if self.selectedNode != null:
+		# catch interaction with child of roadMap when directly selected
+		self.roadmap = self.selectedNode.get_parent()
+	
 	#### INSTRUCTIONS ####
 	# Left click dragging moves a node
 	# Dragging one node onto another puts the dragged node back, and adds a connection

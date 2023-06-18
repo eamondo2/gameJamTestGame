@@ -84,7 +84,7 @@ func simplifyGraph(connections: Array[Array]):
 				simpleConnections[j].append(i)
 	return simpleConnections
 
-func simpleFindPath(nodes: Array[Node], simplifiedConnections: Array[Array], start: int, end: int):
+func simpleFindPath(nodes: Array[Intersection], simplifiedConnections: Array[Variant], start: int, end: int):
 	var pathToNodes = []
 	pathToNodes.resize(simplifiedConnections.size())
 	pathToNodes.fill([])
