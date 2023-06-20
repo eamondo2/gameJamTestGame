@@ -34,16 +34,19 @@ func _ready():
 func _process(delta):
 	if !Engine.is_editor_hint():
 		self.progress_ratio += speedScale * 0.05 * delta;
-		pass
+		
+func _input(event):
+	pass
 
 func _draw():
 	if Engine.is_editor_hint():
 		for n in requiredNodes:
-			draw_circle(n.position, 10, nodeColor)
+			draw_circle(n.position, 7, nodeColor)
 
 func addNode(node: Intersection):
-	requiredNodes.append(node)
-	redoPath(roadmap)
+	if requiredNodes.find(node) == -1:
+		requiredNodes.append(node)
+		redoPath(roadmap)
 
 func removeNode(node: Intersection):
 	for i in range(requiredNodes.size()):
@@ -55,12 +58,14 @@ func removeNode(node: Intersection):
 			
 func redoPath(roadmap: RoadMap):
 	var curveObj = self.get_node("Path")
-	if requiredNodes.size() > 0:
+	# Need at least 2 points, otherwise we just want an empty path
+	if requiredNodes.size() > 1:
 		var path: Array[Intersection] = []
 		var previousNode
 		for n in requiredNodes:
 			if previousNode != null:
 				# This will return a list of nodes, exclusive on the first step, inclusive on the last
+				# Would be nice if we could make it not overlap itself, but that's tricky
 				path.append_array(roadmap.findPath(previousNode, n))
 			else:
 				path.append(n)

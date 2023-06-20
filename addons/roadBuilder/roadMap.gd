@@ -8,7 +8,7 @@ extends Node2D
 @export var nodes: Array[Intersection] = []
 @export var connections: Array[Array] = []
 var math
-var changed = false
+var changed = true
 var weightedConnections: Array[Variant] = []
 
 @export var couriers: Array[Courier] = []
@@ -25,12 +25,12 @@ func _enter_tree():
 	for cChild in self.get_children(true):
 		if cChild is Courier and !self.couriers.any(func(c): return !self.couriers.has(c)):
 			self.couriers.append(cChild)
+	changed = true
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	math = math_funcs.new()
-	weightedConnections = math.weightConnections(nodes, connections)
 	set_process(true)
 	pass # Replace with function body.
 

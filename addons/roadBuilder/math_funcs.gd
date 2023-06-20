@@ -59,21 +59,21 @@ func weightConnections(nodes: Array, connections: Array[Variant]):
 	for i in range(weightedConnections.size()):
 		weightedConnections[i] = row.duplicate()
 	for i in range(connections.size()):
-		weightedConnections.append([])
-		for j in range(i):
-			var length = (nodes[i].position - nodes[j].position).length()
-			weightedConnections[i][j] = length
-			weightedConnections[j][i] = length
+		for j in range(i+1):
+			if connections[i][j]:
+				var length = (nodes[i].position - nodes[j].position).length()
+				weightedConnections[i][j] = length
+				weightedConnections[j][i] = length
 	return weightedConnections
 
 func findPath(nodes: Array, weightedConnections: Array[Variant], start: int, end: int):
 	return A_Star(start, end, weightedConnections, nodes)
 
 func reconstruct_path(cameFrom: Array, current: int):
-	var total_path = [current]
+	var total_path = []
 	while cameFrom[current] != -1:
-		current = cameFrom[current]
 		total_path.push_front(current)
+		current = cameFrom[current]
 	return total_path
 
 func heuristic(node: Node, goal: Node):
@@ -108,9 +108,9 @@ func A_Star(start: int, goal: int, weightedConnections: Array[Variant], nodes: A
 #
 	while openSet.size() > 0:
 #        // This operation can occur in O(Log(N)) time if openSet is a min-heap or a priority queue
-		var current = 0 # = the node in openSet having the lowest fScore[] value
-		for i in range(fScore.size()):
-			if fScore[i] < fScore[current]:
+		var current = -1 # = the node in openSet having the lowest fScore[] value
+		for i in openSet:
+			if current == -1 or fScore[i] < fScore[current]:
 				current = i
 		if current == goal:
 			return reconstruct_path(cameFrom, current)
