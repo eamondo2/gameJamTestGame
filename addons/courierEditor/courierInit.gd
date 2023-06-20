@@ -6,7 +6,9 @@ extends Node2D
 func _ready():
 	var courierScene = load("res://addons/courierEditor/courier.tscn")
 	# TODO: Not sure about this 1, if problems,
-	var courier = courierScene.instantiate(1)
+	var courier = courierScene.instantiate(0)
 	get_parent().add_child(courier)
 	courier.owner = get_parent()
+	get_parent().set_editable_instance(courier, true)
+	
 	self.queue_free()
