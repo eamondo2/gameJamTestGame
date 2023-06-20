@@ -30,10 +30,6 @@ func _handles(object: Object):
 			print('Must have a RoadMap to edit Courier paths')
 	
 	return false
-
-func _edit(object: Object):
-	if object == courier:
-		pass
 	
 func _forward_canvas_gui_input(event):
 	if roadmap != null:

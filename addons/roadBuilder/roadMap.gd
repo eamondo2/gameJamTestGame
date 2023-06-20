@@ -2,14 +2,14 @@
 class_name RoadMap
 extends Node2D
 
-@export_range(0, 500, 10) var defaultConnectionLength: float = 100
+@export_range(0, 2000, 50) var defaultConnectionLength: float = 500
 @export var roadColor: Color = Color.REBECCA_PURPLE
 
 @export var nodes: Array[Intersection] = []
 @export var connections: Array[Array] = []
 var math
 var changed = false
-var simpleConnections: Array[Variant] = []
+var weightedConnections: Array[Variant] = []
 
 @export var couriers: Array[Courier] = []
 
@@ -30,6 +30,7 @@ func _enter_tree():
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	math = math_funcs.new()
+	weightedConnections = math.weightConnections(nodes, connections)
 	set_process(true)
 	pass # Replace with function body.
 
@@ -168,10 +169,8 @@ func switchType(node: Intersection):
 	
 # This will return a list of nodes, exclusive on the first step, inclusive on the last
 func findPath(node1: Intersection, node2: Intersection):
-	
 	if changed:
-		
-		simpleConnections = math.simplifyGraph(connections)
+		weightedConnections = math.weightConnections(nodes, connections)
 		changed = false
 	var index1 = -1
 	var index2 = -1
@@ -181,6 +180,6 @@ func findPath(node1: Intersection, node2: Intersection):
 		if nodes[i] == node2:
 			index2 = i
 	if index1 >= 0 and index2 >= 0 and index1 != index2:
-		var path = math.simpleFindPath(nodes, simpleConnections, index1, index2)
+		var path = math.findPath(nodes, weightedConnections, index1, index2)
 		return path.map(func(index: int): return nodes[index])
 	return []

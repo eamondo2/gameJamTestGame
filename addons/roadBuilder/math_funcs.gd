@@ -50,11 +50,11 @@ func isNearLineSegment(start: Vector2, end: Vector2, point: Vector2, distance: f
 			return  abs((end.x-start.x)*(start.y-point.y)-(start.x-point.x)*(end.y-start.y))**2 < ((end.x-start.x)**2+(end.y-start.y)**2)*distance**2
 	return false
 
-func weightedConnections(nodes: Array[Node], connections: Array[Array]):
+func weightConnections(nodes: Array, connections: Array[Variant]):
 	var weightedConnections = []
 	var row = []
 	row.resize(connections.size())
-	row.fill(-1)
+	row.fill(INF)
 	weightedConnections.resize(connections.size())
 	for i in range(weightedConnections.size()):
 		weightedConnections[i] = row.duplicate()
@@ -66,37 +66,67 @@ func weightedConnections(nodes: Array[Node], connections: Array[Array]):
 			weightedConnections[j][i] = length
 	return weightedConnections
 
-func findPath(nodes: Array[Node], weightedConnections: Array[Array], start: int, end: int):
-	# TODO
-	# Given a start index, and an end index, find shortest path using connections
-	pass
+func findPath(nodes: Array, weightedConnections: Array[Variant], start: int, end: int):
+	return A_Star(start, end, weightedConnections, nodes)
 
-# Above will find the shortest path, these instead finds the path with the least steps
-# That is, the shortest path if all paths were the same length
-func simplifyGraph(connections: Array[Array]):
-	var simpleConnections = []
-	simpleConnections.resize(connections.size())
-	simpleConnections.fill([])
-	for i in range(connections.size()):
-		for j in range(i):
-			if connections[i][j]:
-				simpleConnections[i].append(j)
-				simpleConnections[j].append(i)
-	return simpleConnections
+func reconstruct_path(cameFrom: Array, current: int):
+	var total_path = [current]
+	while cameFrom[current] != -1:
+		current = cameFrom[current]
+		total_path.push_front(current)
+	return total_path
 
-func simpleFindPath(nodes: Array[Intersection], simplifiedConnections: Array[Variant], start: int, end: int):
-	var pathToNodes = []
-	pathToNodes.resize(simplifiedConnections.size())
-	pathToNodes.fill([])
-	var currentNode = start
-	var closestNode
-	var closestDistance = INF
-	while currentNode != end:
-		for i in simplifiedConnections[currentNode]:
-			var distance = (nodes[i].position-nodes[end].position).length()
-			if distance < closestDistance:
-				closestNode = i
-				closestDistance = distance
-			pathToNodes[i] = pathToNodes[currentNode] + [i]
-		currentNode = closestNode
-	return pathToNodes[end]
+func heuristic(node: Node, goal: Node):
+	return (goal.position-node.position).length()
+
+# A* finds a path from start to goal.
+# h is the heuristic function. h(n) estimates the cost to reach goal from node n.
+func A_Star(start: int, goal: int, weightedConnections: Array[Variant], nodes: Array):
+#    // The set of discovered nodes that may need to be (re-)expanded.
+#    // Initially, only the start node is known.
+#    // This is usually implemented as a min-heap or priority queue rather than a hash-set.
+	var openSet = [start]
+
+#    // For node n, cameFrom[n] is the node immediately preceding it on the cheapest path from the start
+#    // to n currently known.
+	var cameFrom: Array = []
+	cameFrom.resize(nodes.size())
+	cameFrom.fill(-1)
+#
+#    // For node n, gScore[n] is the cost of the cheapest path from start to n currently known.
+	var gScore: Array = []
+	gScore.resize(nodes.size())
+	gScore.fill(INF)
+	gScore[start] = 0
+#
+#    // For node n, fScore[n] := gScore[n] + h(n). fScore[n] represents our current best guess as to
+#    // how cheap a path could be from start to finish if it goes through n.
+	var fScore: Array = []
+	fScore.resize(nodes.size())
+	fScore.fill(INF)
+	fScore[start] = heuristic(nodes[start], nodes[goal])
+#
+	while openSet.size() > 0:
+#        // This operation can occur in O(Log(N)) time if openSet is a min-heap or a priority queue
+		var current = 0 # = the node in openSet having the lowest fScore[] value
+		for i in range(fScore.size()):
+			if fScore[i] < fScore[current]:
+				current = i
+		if current == goal:
+			return reconstruct_path(cameFrom, current)
+
+		openSet.erase(current)
+		for i in range(weightedConnections[current].size()): # each neighbor of current
+#            // d(current,neighbor) is the weight of the edge from current to neighbor
+#            // tentative_gScore is the distance from start to the neighbor through current
+			var tentative_gScore = gScore[current] + weightedConnections[current][i] # d(current, neighbor)
+			if tentative_gScore < gScore[i]:
+#                // This path to neighbor is better than any previous one. Record it!
+				cameFrom[i] = current
+				gScore[i] = tentative_gScore
+				fScore[i] = tentative_gScore + heuristic(nodes[i], nodes[goal])
+				if openSet.find(i) == -1:
+					openSet.append(i)
+#
+#    // Open set is empty but goal was never reached
+	return []
