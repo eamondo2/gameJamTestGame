@@ -35,7 +35,6 @@ func _handles(object: Object):
 	if object is Intersection:
 		get_editor_interface().get_selection().add_node(object.get_parent())
 		get_editor_interface().get_selection().remove_node(object)
-		self.selectedNode = object
 		return true
 	return false
 	
