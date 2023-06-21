@@ -26,6 +26,7 @@ var dragging = false
 var selected = false
 var dropTarget
 var target
+var package
 
 const PATH_WIGGLE = 20
 const INTERACTION_DISTANCE = 10
@@ -40,9 +41,21 @@ func _ready():
 func _process(delta):
 	if !Engine.is_editor_hint():
 		self.progress_ratio += speedScale * 0.05 * delta;
-		if dropTarget != null and (dropTarget.position - position).length() < DROP_DISTANCE:
-			dropTarget = null
-			# Drop the package
+		if dropTarget != null:
+			if package == null:
+				# If we're near the package, set package
+				var packages = get_tree().get_nodes_in_group('packages')
+				for p in packages:
+					if (p.position - position).length() <= DROP_DISTANCE:
+						package = p
+						package.carriedBy = self
+						break
+			else:
+				package.setPosition(position)
+				if (dropTarget - position).length() < DROP_DISTANCE:
+					package.setPosition(dropTarget)
+					package.carriedBy = null
+					dropTarget = null
 		
 func _input(event):
 	if !Engine.is_editor_hint():
@@ -102,9 +115,22 @@ func redoPath(roadmap: RoadMap):
 		# Connect end to start
 		path.append_array(roadmap.findPath(requiredNodes[-1], requiredNodes[0]))
 		curveObj.curve.clear_points()
+		var points = []
 		for n in path:
-			curveObj.curve.add_point(roadmap.to_local(n.position+Vector2(PATH_WIGGLE*(randf()-.5), PATH_WIGGLE*(randf()-.5))))
-			
+			points.append(roadmap.to_local(n.position+Vector2(PATH_WIGGLE*(randf()-.5), PATH_WIGGLE*(randf()-.5))))
+		# Make the ends meet up
+		points[-1] = points[0]
+		for i in range(points.size()):
+			# Attempt at smoothing the curve, not quite sure why it doesn't work
+			# i-1 is the previous point, with wrap around due to negative index,
+			var A =  points[i-1]
+			var B = points[i]
+			# have to % i+1 to get the "next" point to wrap
+			var C = points[(i+1)%points.size()]
+			var cntrl1 = (A-B)*.1
+			var cntrl2 = (C-B)*.1
+			curveObj.curve.add_point(B, cntrl1, cntrl2)
+
 		totalNodes = path
 	else:
 		totalNodes = []

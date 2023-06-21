@@ -33,7 +33,8 @@ func _handles(object: Object):
 		roadmap = object
 		return true
 	if object is Intersection:
-		print('intersection select event')
+		get_editor_interface().get_selection().add_node(object.get_parent())
+		get_editor_interface().get_selection().remove_node(object)
 		self.selectedNode = object
 		return true
 	return false
