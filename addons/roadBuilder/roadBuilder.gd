@@ -63,7 +63,7 @@ func _forward_canvas_gui_input(event):
 							selectedNode = null
 						elif event.button_index == MOUSE_BUTTON_LEFT:
 							if event.double_click:
-								roadmap.switchType(selectedNode)
+								selectedNode = roadmap.switchType(selectedNode)
 							else:
 								dragging = true
 					else:

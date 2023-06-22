@@ -1,10 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://dlevjsmnm25f2"]
+[gd_scene load_steps=4 format=3 uid="uid://dlevjsmnm25f2"]
 
 [ext_resource type="Script" path="res://addons/courierEditor/courier.gd" id="1_ltfii"]
 [ext_resource type="Script" path="res://addons/courierEditor/charSprite.gd" id="2_jyo5a"]
-
-[sub_resource type="Curve2D" id="Curve2D_goyx1"]
-resource_local_to_scene = true
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_gpy40"]
 resource_local_to_scene = true
@@ -14,10 +11,8 @@ load_path = "res://.godot/imported/tile_0099.png-5d528b45d92d455ccf82df553919ad7
 script = ExtResource("1_ltfii")
 
 [node name="Path" type="Path2D" parent="."]
-curve = SubResource("Curve2D_goyx1")
 
 [node name="spriteFollow" type="PathFollow2D" parent="Path"]
-position = Vector2(-123.777, -27.5373)
 
 [node name="personSprite" type="Sprite2D" parent="Path/spriteFollow"]
 texture_filter = 3

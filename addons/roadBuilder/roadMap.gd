@@ -166,6 +166,8 @@ func switchType(node: Intersection):
 		if nodes[i] == node:
 			nodes[i] = newNode
 	node.replace_by(newNode)
+	node.queue_free()
+	return newNode
 	
 # This will return a list of nodes, exclusive on the first step, inclusive on the last
 func findPath(node1: Intersection, node2: Intersection):

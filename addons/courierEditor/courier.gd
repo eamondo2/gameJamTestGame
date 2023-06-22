@@ -19,6 +19,8 @@ extends Node2D
 
 @export var speedScale = 1;
 
+@export var curve: Curve2D = Curve2D.new()
+
 var roadmap: RoadMap
 var requiredNodes: Array[Intersection] = []
 var totalNodes: Array[Intersection] = []
@@ -37,10 +39,11 @@ func _ready():
 	self.add_to_group('courier', true)
 	self.roadmap = get_tree().get_first_node_in_group('roadmap')
 	self.progress_ratio = self.progress_ratio;
+	setCurve(curve)
 
 func _process(delta):
 	if !Engine.is_editor_hint():
-		self.progress_ratio += speedScale * 0.05 * delta;
+		self.progress_ratio += speedScale * 0.1 * delta;
 		if dropTarget != null:
 			if package == null:
 				# If we're near the package, set package
@@ -99,7 +102,6 @@ func removeNode(node: Intersection):
 	return false
 			
 func redoPath(roadmap: RoadMap):
-	var curveObj = self.get_node("Path")
 	# Need at least 2 points, otherwise we just want an empty path
 	if requiredNodes.size() > 1:
 		var path: Array[Intersection] = []
@@ -114,7 +116,7 @@ func redoPath(roadmap: RoadMap):
 			previousNode = n
 		# Connect end to start
 		path.append_array(roadmap.findPath(requiredNodes[-1], requiredNodes[0]))
-		curveObj.curve.clear_points()
+		curve.clear_points()
 		var points = []
 		for n in path:
 			points.append(roadmap.to_local(n.position+Vector2(PATH_WIGGLE*(randf()-.5), PATH_WIGGLE*(randf()-.5))))
@@ -129,10 +131,16 @@ func redoPath(roadmap: RoadMap):
 			var C = points[(i+1)%points.size()]
 			var cntrl1 = (A-B)*.1
 			var cntrl2 = (C-B)*.1
-			curveObj.curve.add_point(B, cntrl1, cntrl2)
+			curve.add_point(B, cntrl1, cntrl2)
 
 		totalNodes = path
 	else:
 		totalNodes = []
-		curveObj.curve.clear_points()
+		curve.clear_points()
+	setCurve(curve)
 	queue_redraw()
+	
+func setCurve(curve):
+	var curveObj = self.get_node("Path")
+	curveObj.curve = curve
+	
