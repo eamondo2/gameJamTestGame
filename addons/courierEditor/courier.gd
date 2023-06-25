@@ -17,7 +17,9 @@ extends Node2D
 
 @export_color_no_alpha var color: Color = Color.RED
 
-@export var speedScale = 1;
+@export_range(0, 5, 0.01) var speedScale: float:
+	set(value):
+		speedScale = value;
 
 @export var curve: Curve2D = Curve2D.new()
 
@@ -31,8 +33,12 @@ var target
 var package
 
 const PATH_WIGGLE = 20
-const INTERACTION_DISTANCE = 10
+const INTERACTION_DISTANCE = 100
 const DROP_DISTANCE = 30
+
+func renderedPosition():
+	var childSprite = self.get_node("Path/spriteFollow/personSprite");
+	return childSprite.global_position;
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -42,20 +48,22 @@ func _ready():
 	setCurve(curve)
 
 func _process(delta):
+	
 	if !Engine.is_editor_hint():
+		queue_redraw()
 		self.progress_ratio += speedScale * 0.1 * delta;
 		if dropTarget != null:
 			if package == null:
 				# If we're near the package, set package
 				var packages = get_tree().get_nodes_in_group('packages')
 				for p in packages:
-					if (p.position - position).length() <= DROP_DISTANCE:
+					if (p.global_position - renderedPosition()).length() <= DROP_DISTANCE:
 						package = p
 						package.carriedBy = self
 						break
 			else:
 				package.setPosition(position)
-				if (dropTarget - position).length() < DROP_DISTANCE:
+				if (dropTarget - renderedPosition()).length() < DROP_DISTANCE:
 					package.setPosition(dropTarget)
 					package.carriedBy = null
 					dropTarget = null
@@ -63,30 +71,40 @@ func _process(delta):
 func _input(event):
 	if !Engine.is_editor_hint():
 		if event is InputEventMouseButton:
+			print('evt trigger')
 			if event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-				if (event.position - position).length() < INTERACTION_DISTANCE:
+				print('press and mbleft')
+				if (get_global_mouse_position() - renderedPosition()).length() < INTERACTION_DISTANCE:
+					print('press, within int.dist')
 					dragging = true
 				else:
 					dragging = false
 			else:
 				if dragging:
-					var node = roadmap.selectNode(event.position)
+					var node = roadmap.selectNode(get_global_mouse_position())
 					if node is DropOff:
-						dropTarget = node.position
+						dropTarget = node.global_position
 				dragging = false
 		elif event is InputEventMouseMotion and dragging:
-			target = event.position
+			target = get_global_mouse_position()
 			queue_redraw()
 
 func _draw():
 	if Engine.is_editor_hint():
 		for n in requiredNodes:
-			draw_circle(n.position, 7, color)
+			draw_circle(n.global_position, 7, color)
 	else:
+		draw_line(get_global_mouse_position(), (self.get_node("Path/spriteFollow/personSprite").global_position), Color.ORANGE, 2)
+		draw_circle(renderedPosition(), INTERACTION_DISTANCE, Color.PALE_TURQUOISE)
+		var packages = get_tree().get_nodes_in_group('packages')
+		for p in packages:
+			draw_line(get_global_mouse_position(), p.global_position, Color.RED, 2);
+			draw_circle(p.global_position, 3, Color.FUCHSIA)
 		if dragging and target != null:
-			draw_line(position, target, color, 3)
+			draw_line(renderedPosition(), target, color, 3)
 		if dropTarget != null:
 			draw_circle(dropTarget, 7, color)
+	
 
 func addNode(node: Intersection):
 	if requiredNodes.find(node) == -1:

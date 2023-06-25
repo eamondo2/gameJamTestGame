@@ -40,11 +40,11 @@ func _process(delta):
 	pass
 	
 func _draw():
-	if Engine.is_editor_hint():
-		for i in range(connections.size()):
-			for j in range(i):
-				if connections[i][j]:
-					draw_line(nodes[i].position, nodes[j].position, roadColor)
+	#if Engine.is_editor_hint():
+	for i in range(connections.size()):
+		for j in range(i):
+			if connections[i][j]:
+				draw_line(nodes[i].position, nodes[j].position, roadColor)
 					
 func reset():
 	for n in nodes:

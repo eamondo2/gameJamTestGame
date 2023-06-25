@@ -1,18 +1,22 @@
-[gd_scene load_steps=9 format=3 uid="uid://c204ohwgc2lbf"]
+[gd_scene load_steps=13 format=3 uid="uid://c204ohwgc2lbf"]
 
 [ext_resource type="TileSet" uid="uid://brp8lp0odh2rm" path="res://new_tile_set.tres" id="2_iupoa"]
 [ext_resource type="Script" path="res://addons/roadBuilder/roadMap.gd" id="2_jbyh1"]
-[ext_resource type="Texture2D" uid="uid://dkkv028dygv4u" path="res://assets/kenney_tiny-town/Tiles/tile_0083.png" id="3_p3get"]
 [ext_resource type="Script" path="res://addons/roadBuilder/intersection.gd" id="4_xcvnf"]
 [ext_resource type="PackedScene" uid="uid://dlevjsmnm25f2" path="res://addons/courierEditor/courier.tscn" id="5_08oum"]
-[ext_resource type="Script" path="res://addons/courierEditor/courier.gd" id="6_3b2ud"]
+[ext_resource type="Texture2D" uid="uid://dkkv028dygv4u" path="res://assets/kenney_tiny-town/Tiles/tile_0083.png" id="5_ke8vs"]
 [ext_resource type="Texture2D" uid="uid://kwbw88w54od0" path="res://assets/kenney_tiny-town/Tiles/tile_0029.png" id="6_rb11g"]
+[ext_resource type="Texture2D" uid="uid://cdylonkmnftv5" path="res://assets/kenney_tiny-town/Tiles/tile_0107.png" id="6_rmurg"]
+[ext_resource type="Texture2D" uid="uid://cdylonkmnftv5" path="res://addons/roadBuilder/bag.png" id="7_a2bef"]
+[ext_resource type="Script" path="res://addons/roadBuilder/dropoff.gd" id="7_mo5dj"]
+[ext_resource type="Script" path="res://addons/courierEditor/package.gd" id="10_0popg"]
+[ext_resource type="Texture2D" uid="uid://cppb3d6r852ht" path="res://assets/kenney_tiny-dungeon/Tiles/tile_0019.png" id="10_3f1yi"]
 
 [sub_resource type="Curve2D" id="Curve2D_u44vs"]
 _data = {
-"points": PackedVector2Array(0, 0, 1.22746, -10.5621, 499.412, 278.613, -1.22746, 10.5621, 4.57956, 0.357623, 511.687, 172.992, -4.57956, -0.357623, 2.52648, 12.0266, 557.482, 176.568, -2.52648, -12.0266, -8.3335, -1.8221, 582.747, 296.834, 8.3335, 1.8221, 0, 0, 499.412, 278.613)
+"points": PackedVector2Array(0, 0, -2.38499, -12.0722, 581.763, 302.13, 2.38499, 12.0722, 16.09, -4.27558, 557.913, 181.409, -16.09, 4.27558, 13.96, 1.97245, 718.813, 138.653, -13.96, -1.97245, 4.68687, 19.3086, 858.414, 158.377, -4.68687, -19.3086, -21.7076, 2.51216, 905.282, 351.463, 21.7076, -2.51216, -10.6443, -7.44546, 688.207, 376.585, 10.6443, 7.44546, 0, 0, 581.763, 302.13)
 }
-point_count = 5
+point_count = 7
 
 [node name="Node2D" type="Node2D"]
 
@@ -31,34 +35,75 @@ scale = Vector2(0.25, 0.25)
 
 [node name="RoadMap" type="Node2D" parent="." node_paths=PackedStringArray("nodes") groups=["roadmap"]]
 script = ExtResource("2_jbyh1")
-nodes = [NodePath("@Sprite2D@21041"), NodePath("@Sprite2D@21046"), NodePath("@Sprite2D@21047"), NodePath("@Sprite2D@21048")]
-connections = Array[Array]([[false, true, true, true], [true, false, true, true], [true, true, false, false], [true, true, false, false]])
+nodes = [NodePath("@Sprite2D@21041"), NodePath("@Sprite2D@21046"), NodePath("@Sprite2D@21047"), NodePath("@Sprite2D@21048"), NodePath("@Sprite2D@20908"), NodePath("@Sprite2D@20909"), NodePath("@Sprite2D@22205"), NodePath("@Sprite2D@30460"), NodePath("@Sprite2D@26378"), NodePath("@Sprite2D@25523")]
+connections = Array[Array]([[false, true, true, true, true, false, false, false, false, true], [true, false, true, true, false, true, true, false, false, false], [true, true, false, false, false, true, false, false, true, true], [true, true, false, false, true, false, false, false, false, false], [true, false, false, true, false, false, false, false, false, false], [false, true, true, false, false, false, false, false, false, false], [false, true, false, false, false, false, false, true, false, false], [false, false, false, false, false, false, true, false, true, false], [false, false, true, false, false, false, false, true, false, true], [true, false, true, false, false, false, false, false, true, false]])
 
 [node name="@Sprite2D@21041" type="Sprite2D" parent="RoadMap"]
 texture_filter = 1
 position = Vector2(506.689, 176.86)
-texture = ExtResource("3_p3get")
+texture = ExtResource("5_ke8vs")
 script = ExtResource("4_xcvnf")
 
 [node name="@Sprite2D@21046" type="Sprite2D" parent="RoadMap"]
 texture_filter = 1
 position = Vector2(579.521, 293.533)
-texture = ExtResource("3_p3get")
+texture = ExtResource("5_ke8vs")
 script = ExtResource("4_xcvnf")
 
 [node name="@Sprite2D@21047" type="Sprite2D" parent="RoadMap"]
 texture_filter = 1
 position = Vector2(551.237, 181.81)
-texture = ExtResource("3_p3get")
+texture = ExtResource("5_ke8vs")
 script = ExtResource("4_xcvnf")
 
 [node name="@Sprite2D@21048" type="Sprite2D" parent="RoadMap"]
 texture_filter = 1
 position = Vector2(496.082, 282.219)
-texture = ExtResource("3_p3get")
+texture = ExtResource("5_ke8vs")
 script = ExtResource("4_xcvnf")
 
-[node name="Courier" type="Node2D" parent="." groups=["courier"] instance=ExtResource("5_08oum")]
-script = ExtResource("6_3b2ud")
+[node name="@Sprite2D@20908" type="Sprite2D" parent="RoadMap"]
+texture_filter = 1
+position = Vector2(450.267, 216.975)
+texture = ExtResource("5_ke8vs")
+script = ExtResource("4_xcvnf")
+
+[node name="@Sprite2D@20909" type="Sprite2D" parent="RoadMap"]
+texture_filter = 1
+position = Vector2(648.492, 241.92)
+texture = ExtResource("5_ke8vs")
+script = ExtResource("4_xcvnf")
+
+[node name="@Sprite2D@22205" type="Sprite2D" parent="RoadMap"]
+texture_filter = 1
+position = Vector2(695.264, 376)
+texture = ExtResource("6_rmurg")
+script = ExtResource("7_mo5dj")
+
+[node name="@Sprite2D@30460" type="Sprite2D" parent="RoadMap"]
+texture_filter = 1
+position = Vector2(902.398, 350.61)
+texture = ExtResource("7_a2bef")
+script = ExtResource("7_mo5dj")
+
+[node name="@Sprite2D@26378" type="Sprite2D" parent="RoadMap"]
+texture_filter = 1
+position = Vector2(848.944, 157.285)
+texture = ExtResource("6_rmurg")
+script = ExtResource("7_mo5dj")
+
+[node name="@Sprite2D@25523" type="Sprite2D" parent="RoadMap"]
+texture_filter = 1
+position = Vector2(725.59, 137.075)
+texture = ExtResource("5_ke8vs")
+script = ExtResource("4_xcvnf")
+
+[node name="Courier" parent="." instance=ExtResource("5_08oum")]
 sprite = ExtResource("6_rb11g")
+speedScale = 0.28
 curve = SubResource("Curve2D_u44vs")
+
+[node name="Package" type="Node2D" parent="."]
+position = Vector2(850, 158)
+script = ExtResource("10_0popg")
+texture = ExtResource("10_3f1yi")
