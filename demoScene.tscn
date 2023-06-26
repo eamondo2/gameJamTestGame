@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://c204ohwgc2lbf"]
+[gd_scene load_steps=15 format=3 uid="uid://c204ohwgc2lbf"]
 
 [ext_resource type="TileSet" uid="uid://brp8lp0odh2rm" path="res://new_tile_set.tres" id="2_iupoa"]
 [ext_resource type="Script" path="res://addons/roadBuilder/roadMap.gd" id="2_jbyh1"]
@@ -7,10 +7,12 @@
 [ext_resource type="Texture2D" uid="uid://dkkv028dygv4u" path="res://assets/kenney_tiny-town/Tiles/tile_0083.png" id="5_ke8vs"]
 [ext_resource type="Texture2D" uid="uid://kwbw88w54od0" path="res://assets/kenney_tiny-town/Tiles/tile_0029.png" id="6_rb11g"]
 [ext_resource type="Texture2D" uid="uid://cdylonkmnftv5" path="res://assets/kenney_tiny-town/Tiles/tile_0107.png" id="6_rmurg"]
-[ext_resource type="Texture2D" uid="uid://cdylonkmnftv5" path="res://addons/roadBuilder/bag.png" id="7_a2bef"]
 [ext_resource type="Script" path="res://addons/roadBuilder/dropoff.gd" id="7_mo5dj"]
+[ext_resource type="Texture2D" uid="uid://dkkv028dygv4u" path="res://addons/roadBuilder/signpost.png" id="7_wwow0"]
 [ext_resource type="Script" path="res://addons/courierEditor/package.gd" id="10_0popg"]
-[ext_resource type="Texture2D" uid="uid://cppb3d6r852ht" path="res://assets/kenney_tiny-dungeon/Tiles/tile_0019.png" id="10_3f1yi"]
+[ext_resource type="Texture2D" uid="uid://b1agbfxh7o3op" path="res://assets/kenney_tiny-dungeon/Tiles/tile_0089.png" id="11_lfdgu"]
+[ext_resource type="Texture2D" uid="uid://8s5bnp2tdquw" path="res://assets/kenney_tiny-dungeon/Tiles/tile_0110.png" id="13_12n0v"]
+[ext_resource type="PackedScene" uid="uid://cukyyvvcaw157" path="res://ControlSet.tscn" id="13_sl5pp"]
 
 [sub_resource type="Curve2D" id="Curve2D_u44vs"]
 _data = {
@@ -35,8 +37,8 @@ scale = Vector2(0.25, 0.25)
 
 [node name="RoadMap" type="Node2D" parent="." node_paths=PackedStringArray("nodes") groups=["roadmap"]]
 script = ExtResource("2_jbyh1")
-nodes = [NodePath("@Sprite2D@21041"), NodePath("@Sprite2D@21046"), NodePath("@Sprite2D@21047"), NodePath("@Sprite2D@21048"), NodePath("@Sprite2D@20908"), NodePath("@Sprite2D@20909"), NodePath("@Sprite2D@22205"), NodePath("@Sprite2D@30460"), NodePath("@Sprite2D@26378"), NodePath("@Sprite2D@25523")]
-connections = Array[Array]([[false, true, true, true, true, false, false, false, false, true], [true, false, true, true, false, true, true, false, false, false], [true, true, false, false, false, true, false, false, true, true], [true, true, false, false, true, false, false, false, false, false], [true, false, false, true, false, false, false, false, false, false], [false, true, true, false, false, false, false, false, false, false], [false, true, false, false, false, false, false, true, false, false], [false, false, false, false, false, false, true, false, true, false], [false, false, true, false, false, false, false, true, false, true], [true, false, true, false, false, false, false, false, true, false]])
+nodes = [NodePath("@Sprite2D@21041"), NodePath("@Sprite2D@21046"), NodePath("@Sprite2D@21047"), NodePath("@Sprite2D@21048"), NodePath("@Sprite2D@20908"), NodePath("@Sprite2D@20909"), NodePath("@Sprite2D@22205"), NodePath("@Sprite2D@30460"), NodePath("@Sprite2D@26378"), NodePath("@Sprite2D@25523"), NodePath("@Sprite2D@22458"), NodePath("@Sprite2D@22459")]
+connections = Array[Array]([[false, true, true, true, true, false, false, false, false, true, false, false], [true, false, true, true, false, true, true, false, false, false, false, false], [true, true, false, false, false, true, false, false, true, true, false, false], [true, true, false, false, true, false, false, false, false, false, false, false], [true, false, false, true, false, false, false, false, false, false, false, false], [false, true, true, false, false, false, false, false, false, false, false, false], [false, true, false, false, false, false, false, true, false, false, false, false], [false, false, false, false, false, false, true, false, true, false, true, true], [false, false, true, false, false, false, false, true, false, true, true, true], [true, false, true, false, false, false, false, false, true, false, false, false], [false, false, false, false, false, false, false, true, true, false, false, false], [false, false, false, false, false, false, false, true, true, false, false, false]])
 
 [node name="@Sprite2D@21041" type="Sprite2D" parent="RoadMap"]
 texture_filter = 1
@@ -83,7 +85,7 @@ script = ExtResource("7_mo5dj")
 [node name="@Sprite2D@30460" type="Sprite2D" parent="RoadMap"]
 texture_filter = 1
 position = Vector2(902.398, 350.61)
-texture = ExtResource("7_a2bef")
+texture = ExtResource("6_rmurg")
 script = ExtResource("7_mo5dj")
 
 [node name="@Sprite2D@26378" type="Sprite2D" parent="RoadMap"]
@@ -98,12 +100,34 @@ position = Vector2(725.59, 137.075)
 texture = ExtResource("5_ke8vs")
 script = ExtResource("4_xcvnf")
 
+[node name="@Sprite2D@22458" type="Sprite2D" parent="RoadMap"]
+texture_filter = 1
+position = Vector2(771.135, 252.792)
+texture = ExtResource("7_wwow0")
+script = ExtResource("4_xcvnf")
+
+[node name="@Sprite2D@22459" type="Sprite2D" parent="RoadMap"]
+texture_filter = 1
+position = Vector2(964.382, 218.305)
+texture = ExtResource("7_wwow0")
+script = ExtResource("4_xcvnf")
+
 [node name="Courier" parent="." instance=ExtResource("5_08oum")]
 sprite = ExtResource("6_rb11g")
-speedScale = 0.28
+speedScale = 1.21
 curve = SubResource("Curve2D_u44vs")
 
 [node name="Package" type="Node2D" parent="."]
 position = Vector2(850, 158)
 script = ExtResource("10_0popg")
-texture = ExtResource("10_3f1yi")
+texture = ExtResource("11_lfdgu")
+
+[node name="@Node2D@21273" parent="." instance=ExtResource("5_08oum")]
+sprite = ExtResource("13_12n0v")
+speedScale = 1.23
+
+[node name="ControlSet" parent="." instance=ExtResource("13_sl5pp")]
+offset_left = 305.0
+offset_top = 83.0
+offset_right = 305.0
+offset_bottom = 83.0

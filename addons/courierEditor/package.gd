@@ -31,8 +31,5 @@ func _process(delta):
 	pass
 
 func setPosition(position: Vector2):
-	print('posSet')
-	print(position)
-	self.position = to_global(position)
-	self.markerSprite.position = to_global(position);
+	self.position = position;
 	# Also do any checks like "are we in the target zone" or whatever

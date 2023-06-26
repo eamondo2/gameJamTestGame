@@ -17,7 +17,7 @@ extends Node2D
 
 @export_color_no_alpha var color: Color = Color.RED
 
-@export_range(0, 5, 0.01) var speedScale: float:
+@export_range(0, 5, 0.01) var speedScale: float = 1:
 	set(value):
 		speedScale = value;
 
@@ -32,8 +32,11 @@ var dropTarget
 var target
 var package
 
+var should_pause = false;
+var control_speed_scale = 1;
+
 const PATH_WIGGLE = 20
-const INTERACTION_DISTANCE = 100
+const INTERACTION_DISTANCE = 10
 const DROP_DISTANCE = 30
 
 func renderedPosition():
@@ -48,8 +51,10 @@ func _ready():
 	setCurve(curve)
 
 func _process(delta):
-	
 	if !Engine.is_editor_hint():
+		delta = delta * control_speed_scale;
+		if should_pause:
+			delta = 0;
 		queue_redraw()
 		self.progress_ratio += speedScale * 0.1 * delta;
 		if dropTarget != null:
@@ -62,11 +67,12 @@ func _process(delta):
 						package.carriedBy = self
 						break
 			else:
-				package.setPosition(position)
+				package.setPosition(renderedPosition())
 				if (dropTarget - renderedPosition()).length() < DROP_DISTANCE:
 					package.setPosition(dropTarget)
 					package.carriedBy = null
 					dropTarget = null
+					package = null
 		
 func _input(event):
 	if !Engine.is_editor_hint():
@@ -94,12 +100,12 @@ func _draw():
 		for n in requiredNodes:
 			draw_circle(n.global_position, 7, color)
 	else:
-		draw_line(get_global_mouse_position(), (self.get_node("Path/spriteFollow/personSprite").global_position), Color.ORANGE, 2)
-		draw_circle(renderedPosition(), INTERACTION_DISTANCE, Color.PALE_TURQUOISE)
-		var packages = get_tree().get_nodes_in_group('packages')
-		for p in packages:
-			draw_line(get_global_mouse_position(), p.global_position, Color.RED, 2);
-			draw_circle(p.global_position, 3, Color.FUCHSIA)
+		# draw_line(get_global_mouse_position(), (self.get_node("Path/spriteFollow/personSprite").global_position), Color.ORANGE, 2)
+		# draw_circle(renderedPosition(), INTERACTION_DISTANCE, Color.PALE_TURQUOISE)
+		# var packages = get_tree().get_nodes_in_group('packages')
+		# for p in packages:
+		# 	draw_line(get_global_mouse_position(), p.global_position, Color.RED, 2);
+		# 	draw_circle(p.global_position, 3, Color.FUCHSIA)
 		if dragging and target != null:
 			draw_line(renderedPosition(), target, color, 3)
 		if dropTarget != null:

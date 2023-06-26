@@ -4,6 +4,10 @@
 [ext_resource type="Script" path="res://addons/courierEditor/charSprite.gd" id="2_jyo5a"]
 
 [sub_resource type="Curve2D" id="Curve2D_kpew4"]
+_data = {
+"points": PackedVector2Array(0, 0, 8.4286, -9.67148, 764.718, 262.765, -8.4286, 9.67148, 10.6245, 4.44405, 849.004, 166.05, -10.6245, -4.44405, -4.91605, 14.1588, 955.249, 210.491, 4.91605, -14.1588, -14.137, -8.93136, 906.088, 352.078, 14.137, 8.93136, 0, 0, 764.718, 262.765)
+}
+point_count = 5
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_gpy40"]
 resource_local_to_scene = true
@@ -11,6 +15,7 @@ load_path = "res://.godot/imported/tile_0099.png-5d528b45d92d455ccf82df553919ad7
 
 [node name="Courier" type="Node2D" groups=["courier"]]
 script = ExtResource("1_ltfii")
+speedScale = 0.0
 curve = SubResource("Curve2D_kpew4")
 
 [node name="Path" type="Path2D" parent="."]
