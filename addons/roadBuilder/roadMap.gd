@@ -2,22 +2,31 @@
 class_name RoadMap
 extends Node2D
 
-@export_range(0, 500, 10) var defaultConnectionLength: float = 100
+@export_range(0, 2000, 50) var defaultConnectionLength: float = 500
 @export var roadColor: Color = Color.REBECCA_PURPLE
 
 @export var nodes: Array[Intersection] = []
 @export var connections: Array[Array] = []
 var math
-var changed = false
-var simpleConnections: Array[Array] = []
+var changed = true
+var weightedConnections: Array[Variant] = []
+
+@export var couriers: Array[Courier] = []
 
 const INTERACTION_DISTANCE = 10
 
 func _enter_tree():
 	if get_tree().has_group("roadmap"):
-		print('Please only use 1 roadmap per scene')
-		self.queue_free()
+		if get_tree().get_nodes_in_group('roadmap').any(func(v): return v != self):
+			print('Please only use 1 roadmap per scene')
+			self.queue_free()
 	self.add_to_group('roadmap', true)
+	self.couriers = []
+	for cChild in self.get_children(true):
+		if cChild is Courier and !self.couriers.any(func(c): return !self.couriers.has(c)):
+			self.couriers.append(cChild)
+	changed = true
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -31,11 +40,11 @@ func _process(delta):
 	pass
 	
 func _draw():
-	if Engine.is_editor_hint():
-		for i in range(connections.size()):
-			for j in range(i):
-				if connections[i][j]:
-					draw_line(nodes[i].position, nodes[j].position, roadColor)
+	#if Engine.is_editor_hint():
+	for i in range(connections.size()):
+		for j in range(i):
+			if connections[i][j]:
+				draw_line(nodes[i].position, nodes[j].position, roadColor)
 					
 func reset():
 	for n in nodes:
@@ -157,11 +166,13 @@ func switchType(node: Intersection):
 		if nodes[i] == node:
 			nodes[i] = newNode
 	node.replace_by(newNode)
+	node.queue_free()
+	return newNode
 	
 # This will return a list of nodes, exclusive on the first step, inclusive on the last
 func findPath(node1: Intersection, node2: Intersection):
 	if changed:
-		simpleConnections = math.simplifyGraph(connections)
+		weightedConnections = math.weightConnections(nodes, connections)
 		changed = false
 	var index1 = -1
 	var index2 = -1
@@ -171,6 +182,6 @@ func findPath(node1: Intersection, node2: Intersection):
 		if nodes[i] == node2:
 			index2 = i
 	if index1 >= 0 and index2 >= 0 and index1 != index2:
-		var path = math.simpleFindPath(nodes, simpleConnections, index1, index2)
+		var path = math.findPath(nodes, weightedConnections, index1, index2)
 		return path.map(func(index: int): return nodes[index])
 	return []

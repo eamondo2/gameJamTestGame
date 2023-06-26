@@ -3,25 +3,29 @@
 [ext_resource type="Script" path="res://addons/courierEditor/courier.gd" id="1_ltfii"]
 [ext_resource type="Script" path="res://addons/courierEditor/charSprite.gd" id="2_jyo5a"]
 
-[sub_resource type="Curve2D" id="Curve2D_ie2mb"]
-resource_local_to_scene = true
+[sub_resource type="Curve2D" id="Curve2D_kpew4"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+"points": PackedVector2Array(0, 0, 8.4286, -9.67148, 764.718, 262.765, -8.4286, 9.67148, 10.6245, 4.44405, 849.004, 166.05, -10.6245, -4.44405, -4.91605, 14.1588, 955.249, 210.491, 4.91605, -14.1588, -14.137, -8.93136, 906.088, 352.078, 14.137, 8.93136, 0, 0, 764.718, 262.765)
 }
-point_count = 2
+point_count = 5
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_gpy40"]
+resource_local_to_scene = true
 load_path = "res://.godot/imported/tile_0099.png-5d528b45d92d455ccf82df553919ad7a.ctex"
 
-[node name="Courier" type="Path2D"]
-curve = SubResource("Curve2D_ie2mb")
+[node name="Courier" type="Node2D" groups=["courier"]]
 script = ExtResource("1_ltfii")
+speedScale = 0.0
+curve = SubResource("Curve2D_kpew4")
 
-[node name="spriteFollow" type="PathFollow2D" parent="."]
+[node name="Path" type="Path2D" parent="."]
+curve = SubResource("Curve2D_kpew4")
 
-[node name="personSprite" type="Sprite2D" parent="spriteFollow"]
+[node name="spriteFollow" type="PathFollow2D" parent="Path"]
+
+[node name="personSprite" type="Sprite2D" parent="Path/spriteFollow"]
 texture_filter = 3
 texture = SubResource("CompressedTexture2D_gpy40")
 script = ExtResource("2_jyo5a")
 
-[connection signal="texture_changed" from="spriteFollow/personSprite" to="." method="_on_person_sprite_texture_changed"]
+[connection signal="texture_changed" from="Path/spriteFollow/personSprite" to="Path" method="_on_person_sprite_texture_changed"]

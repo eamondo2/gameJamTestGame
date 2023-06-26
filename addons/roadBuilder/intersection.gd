@@ -3,7 +3,7 @@ extends Sprite2D
 
 func _enter_tree():
 	texture = load("res://addons/roadBuilder/signpost.png")
-
+	texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	if not Engine.is_editor_hint():
