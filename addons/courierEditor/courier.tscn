@@ -1,31 +1,36 @@
-[gd_scene load_steps=5 format=3 uid="uid://dlevjsmnm25f2"]
+[gd_scene load_steps=6 format=3 uid="uid://dlevjsmnm25f2"]
 
 [ext_resource type="Script" path="res://addons/courierEditor/courier.gd" id="1_ltfii"]
-[ext_resource type="Script" path="res://addons/courierEditor/charSprite.gd" id="2_jyo5a"]
+[ext_resource type="PackedScene" uid="uid://cxcygu42s7hqt" path="res://testTruckRender.tscn" id="3_tknde"]
 
 [sub_resource type="Curve2D" id="Curve2D_kpew4"]
-_data = {
-"points": PackedVector2Array(0, 0, 8.4286, -9.67148, 764.718, 262.765, -8.4286, 9.67148, 10.6245, 4.44405, 849.004, 166.05, -10.6245, -4.44405, -4.91605, 14.1588, 955.249, 210.491, 4.91605, -14.1588, -14.137, -8.93136, 906.088, 352.078, 14.137, 8.93136, 0, 0, 764.718, 262.765)
-}
-point_count = 5
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_gpy40"]
 resource_local_to_scene = true
-load_path = "res://.godot/imported/tile_0099.png-5d528b45d92d455ccf82df553919ad7a.ctex"
+_data = {
+"points": PackedVector2Array(0, 0, -9.77215, -6.16755, 652.69, 237.615, 9.77215, 6.16755, 29.7097, -2.50673, 554.968, 175.94, -29.7097, 2.50673, -7.12167, 10.2351, 852.065, 150.872, 7.12167, -10.2351, 6.21418, -9.69158, 780.848, 253.224, -6.21418, 9.69158, -28.6372, 1.81907, 842.99, 156.308, 28.6372, -1.81907, -4.222, -0.750955, 556.618, 174.499, 4.222, 0.750955, -7.33983, 4.50643, 514.398, 166.989, 7.33983, -4.50643, 5.71417, 6.70397, 441, 212.053, -5.71417, -6.70397, 9.05975, 0.866754, 498.142, 279.093, -9.05975, -0.866754, 9.92109, 9.75271, 588.739, 287.761, -9.92109, -9.75271, -10.599, -8.65993, 687.95, 385.288, 10.599, 8.65993, 7.07292, -6.10729, 581.961, 298.688, -7.07292, 6.10729, 0, 0, 652.69, 237.615)
+}
+point_count = 13
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_bfvfy"]
+resource_local_to_scene = true
+blend_mode = 4
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_nlabi"]
+viewport_path = NodePath("SubViewport")
 
 [node name="Courier" type="Node2D" groups=["courier"]]
 script = ExtResource("1_ltfii")
-speedScale = 0.0
 curve = SubResource("Curve2D_kpew4")
+modelTintFactor = 0
 
 [node name="Path" type="Path2D" parent="."]
 curve = SubResource("Curve2D_kpew4")
 
 [node name="spriteFollow" type="PathFollow2D" parent="Path"]
+position = Vector2(652.69, 237.615)
+rotates = false
 
-[node name="personSprite" type="Sprite2D" parent="Path/spriteFollow"]
-texture_filter = 3
-texture = SubResource("CompressedTexture2D_gpy40")
-script = ExtResource("2_jyo5a")
-
-[connection signal="texture_changed" from="Path/spriteFollow/personSprite" to="Path" method="_on_person_sprite_texture_changed"]
+[node name="truckSprite" parent="Path/spriteFollow" instance=ExtResource("3_tknde")]
+material = SubResource("CanvasItemMaterial_bfvfy")
+texture = SubResource("ViewportTexture_nlabi")
+modelTint = Color(1, 0, 0, 1)
+modelTintFactor = 0

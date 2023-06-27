@@ -1,0 +1,68 @@
+[gd_scene load_steps=10 format=3 uid="uid://cxcygu42s7hqt"]
+
+[ext_resource type="PackedScene" uid="uid://dw5c5oaqn80yd" path="res://testTruck.gltf" id="1_1uki1"]
+[ext_resource type="Script" path="res://testTruckRender.gd" id="1_gcbfj"]
+[ext_resource type="Script" path="res://cam.gd" id="1_qqwsx"]
+[ext_resource type="Shader" path="res://testTruckRender.gdshader" id="2_6cufp"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_qko57"]
+resource_local_to_scene = true
+blend_mode = 4
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_rhk8f"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_fex7b"]
+size = Vector2(10, 10)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3iftk"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("2_6cufp")
+shader_parameter/shadows_enabled = true
+shader_parameter/highlights_enabled = false
+shader_parameter/shadow_strength = 0.7
+shader_parameter/highlight_strength = 0.1
+shader_parameter/highlight_color = Color(0.897885, 0.616375, 0.551948, 1)
+shader_parameter/shadow_color = Color(0, 0, 0, 1)
+shader_parameter/tint_color = Color(0.929412, 0.443137, 0.909804, 1)
+shader_parameter/tint_effect_factor = 0.309
+
+[sub_resource type="Environment" id="Environment_yur71"]
+background_color = Color(0, 0, 0, 0)
+ambient_light_source = 3
+ambient_light_color = Color(0.72549, 0.494118, 0.635294, 1)
+
+[node name="Sprite2D" type="Sprite2D"]
+material = SubResource("CanvasItemMaterial_qko57")
+texture = SubResource("ViewportTexture_rhk8f")
+script = ExtResource("1_gcbfj")
+modelTint = Color(1, 0.509804, 0.317647, 1)
+
+[node name="SubViewport" type="SubViewport" parent="."]
+own_world_3d = true
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(120, 120)
+
+[node name="testTruck" parent="SubViewport" instance=ExtResource("1_1uki1")]
+
+[node name="Camera3D" type="Camera3D" parent="SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 0.64643, 0.762973, 0, -0.762973, 0.64643, 0, 3.93379, 3.27687)
+projection = 1
+current = true
+size = 3.0
+near = 0.01
+script = ExtResource("1_qqwsx")
+
+[node name="Postprocess" type="MeshInstance3D" parent="SubViewport/Camera3D"]
+transform = Transform3D(3.3614, 0, 0, 0, 0.0084463, -2.97241, 0, 0.987613, 0.0254208, -0.0126231, -1.57356e-05, -1.02756)
+mesh = SubResource("PlaneMesh_fex7b")
+surface_material_override/0 = SubResource("ShaderMaterial_3iftk")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 0.737961, 0.674843, 0, -0.674843, 0.737961, -0.0468605, 3.30225, 4.84798)
+sky_mode = 1
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewport"]
+environment = SubResource("Environment_yur71")
