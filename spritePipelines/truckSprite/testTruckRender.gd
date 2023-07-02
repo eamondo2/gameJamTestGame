@@ -7,6 +7,8 @@ var lastPos: Vector2;
 var currentPos: Vector2;
 var extend_vec: Vector2;
 
+var controlNode;
+
 var angle_to = 0;
 
 var lastTick = 0
@@ -23,6 +25,8 @@ var lastTick = 0
 func _ready():
 	truckModel = get_node("SubViewport/testTruck")
 	postProcObject = get_node("SubViewport/Camera3D/Postprocess")
+	if !Engine.is_editor_hint():
+		controlNode = get_tree().get_current_scene().get_node('ControlSet')
 	pass # Replace with function body.
 
 func _draw():
@@ -35,7 +39,6 @@ func _process(delta):
 		postProcObject.get_surface_override_material(0).set_shader_parameter("tint_color", modelTint)
 		postProcObject.get_surface_override_material(0).set_shader_parameter("tint_effect_factor", modelTintFactor)
 	if !Engine.is_editor_hint():
-		var controlNode = get_tree().get_current_scene().get_node('ControlSet')
 		if controlNode.get_node('VBoxContainer/PauseUnpause') and controlNode.get_node("VBoxContainer/PauseUnpause").isPaused:
 			return
 		if controlNode.get_node("VBoxContainer/HScrollBar") and controlNode.get_node("VBoxContainer/HScrollBar").value <= 0.01:

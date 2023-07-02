@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://c204ohwgc2lbf"]
+[gd_scene load_steps=13 format=3 uid="uid://c204ohwgc2lbf"]
 
 [ext_resource type="TileSet" uid="uid://brp8lp0odh2rm" path="res://new_tile_set.tres" id="2_iupoa"]
 [ext_resource type="Script" path="res://addons/roadBuilder/roadMap.gd" id="2_jbyh1"]
@@ -8,15 +8,16 @@
 [ext_resource type="Texture2D" uid="uid://cdylonkmnftv5" path="res://assets/kenney_tiny-town/Tiles/tile_0107.png" id="8_larcd"]
 [ext_resource type="Script" path="res://addons/courierEditor/package.gd" id="10_0popg"]
 [ext_resource type="PackedScene" uid="uid://dlevjsmnm25f2" path="res://addons/courierEditor/courier.tscn" id="10_38q0i"]
+[ext_resource type="Script" path="res://addons/courierEditor/courier.gd" id="11_gx3rn"]
 [ext_resource type="Texture2D" uid="uid://b1agbfxh7o3op" path="res://assets/kenney_tiny-dungeon/Tiles/tile_0089.png" id="11_lfdgu"]
 [ext_resource type="PackedScene" uid="uid://cukyyvvcaw157" path="res://menuComponents/ControlSet.tscn" id="13_sl5pp"]
 
-[sub_resource type="Curve2D" id="Curve2D_nnju8"]
+[sub_resource type="Curve2D" id="Curve2D_snqoi"]
 resource_local_to_scene = true
 _data = {
-"points": PackedVector2Array(0, 0, 19.6396, 2.92123, 420.965, 360.207, -19.6396, -2.92123, 3.53115, -14.183, 617.361, 389.419, -3.53115, 14.183, -23.1708, 11.2618, 652.673, 247.589, 23.1708, -11.2618, 0, 0, 420.965, 360.207)
+"points": PackedVector2Array(0, 0, 1.251, -12.8502, 425.661, 348.988, -1.251, 12.8502, 19.8511, 2.10508, 438.171, 220.486, -19.8511, -2.10508, -2.40939, 14.2733, 636.682, 241.537, 2.40939, -14.2733, -18.6927, -3.52814, 612.588, 384.27, 18.6927, 3.52814, 0, 0, 425.661, 348.988)
 }
-point_count = 4
+point_count = 5
 
 [node name="Node2D" type="Node2D"]
 
@@ -92,5 +93,8 @@ offset_top = 81.0
 offset_right = 304.0
 offset_bottom = 81.0
 
-[node name="Courier" parent="." instance=ExtResource("10_38q0i")]
-curve = SubResource("Curve2D_nnju8")
+[node name="Courier" type="Node2D" parent="." groups=["courier"] instance=ExtResource("10_38q0i")]
+script = ExtResource("11_gx3rn")
+curve = SubResource("Curve2D_snqoi")
+modelTint = Color(0.952941, 0.109804, 0.443137, 1)
+modelTintFactor = 1.0
