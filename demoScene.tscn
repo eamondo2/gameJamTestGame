@@ -11,14 +11,14 @@
 [ext_resource type="Texture2D" uid="uid://b1agbfxh7o3op" path="res://assets/kenney_tiny-dungeon/Tiles/tile_0089.png" id="11_lfdgu"]
 [ext_resource type="PackedScene" uid="uid://cukyyvvcaw157" path="res://ControlSet.tscn" id="13_sl5pp"]
 
-[sub_resource type="Curve2D" id="Curve2D_cgbro"]
+[sub_resource type="Curve2D" id="Curve2D_ainaj"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 22.7681, 2.0794, 424.274, 213.338, -22.7681, -2.0794, -22.866, 11.3327, 651.955, 234.132, 22.866, -11.3327, 20.0826, 4.18608, 423.295, 347.459, -20.0826, -4.18608, 24.7277, -7.87139, 624.121, 389.32, -24.7277, 7.87139, -2.44277, -17.8383, 871.398, 310.606, 2.44277, 17.8383, -22.9172, -1.71325, 846.97, 132.223, 22.9172, 1.71325, -19.3525, 9.82471, 617.799, 115.091, 19.3525, -9.82471, 0, 0, 424.274, 213.338)
 }
 point_count = 8
 
-[sub_resource type="Curve2D" id="Curve2D_1apgv"]
+[sub_resource type="Curve2D" id="Curve2D_4pph1"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 19.4842, 4.73069, 421.729, 343.729, -19.4842, -4.73069, 2.70334, -15.7685, 616.571, 391.036, -2.70334, 15.7685, 20.0931, -9.09164, 643.604, 233.351, -20.0931, 9.09164, -21.7763, -3.73097, 844.535, 142.435, 21.7763, 3.73097, -18.7618, 10.6324, 626.773, 105.125, 18.7618, -10.6324, -1.74259, 13.228, 439.155, 211.45, 1.74259, -13.228, 0, 0, 421.729, 343.729)
@@ -100,8 +100,8 @@ texture = ExtResource("6_u8c43")
 script = ExtResource("4_xcvnf")
 
 [node name="Courier" parent="." instance=ExtResource("10_38q0i")]
-curve = SubResource("Curve2D_cgbro")
+curve = SubResource("Curve2D_ainaj")
 
 [node name="@Node2D@23091" parent="." instance=ExtResource("10_38q0i")]
-curve = SubResource("Curve2D_1apgv")
+curve = SubResource("Curve2D_4pph1")
 modelTint = Color(0.533333, 0.807843, 0, 1)
