@@ -11,7 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://b1agbfxh7o3op" path="res://assets/kenney_tiny-dungeon/Tiles/tile_0089.png" id="11_lfdgu"]
 [ext_resource type="PackedScene" uid="uid://cukyyvvcaw157" path="res://menuComponents/ControlSet.tscn" id="13_sl5pp"]
 
-[sub_resource type="Curve2D" id="Curve2D_hrntl"]
+[sub_resource type="Curve2D" id="Curve2D_nnju8"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 19.6396, 2.92123, 420.965, 360.207, -19.6396, -2.92123, 3.53115, -14.183, 617.361, 389.419, -3.53115, 14.183, -23.1708, 11.2618, 652.673, 247.589, 23.1708, -11.2618, 0, 0, 420.965, 360.207)
@@ -93,4 +93,4 @@ offset_right = 304.0
 offset_bottom = 81.0
 
 [node name="Courier" parent="." instance=ExtResource("10_38q0i")]
-curve = SubResource("Curve2D_hrntl")
+curve = SubResource("Curve2D_nnju8")

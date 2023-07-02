@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://c5t3hd330o3mu" path="res://levels/levelBase.tscn" id="1_luuh7"]
 [ext_resource type="Script" path="res://addons/roadBuilder/roadMap.gd" id="2_b4uau"]
-[ext_resource type="Texture2D" uid="uid://dkkv028dygv4u" path="res://addons/roadBuilder/signpost.png" id="3_l3d2d"]
+[ext_resource type="Texture2D" uid="uid://dkkv028dygv4u" path="res://assets/kenney_tiny-town/Tiles/tile_0083.png" id="3_l3d2d"]
 [ext_resource type="Script" path="res://addons/roadBuilder/intersection.gd" id="4_0o5a4"]
 
 [node name="levelBase" instance=ExtResource("1_luuh7")]
