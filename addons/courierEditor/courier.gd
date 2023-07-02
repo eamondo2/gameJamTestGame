@@ -1,13 +1,6 @@
 @tool
 class_name Courier
 extends Node2D
-
-@export var sprite: Texture2D:
-	set(value):
-		var spriteNode: Sprite2D = get_node("Path/spriteFollow/personSprite");
-		spriteNode.texture = value;
-		sprite = value;
-		#notify_property_list_changed()
 	
 @export_range(0, 1, .01) var progress_ratio: float:
 	set(value):
@@ -22,6 +15,15 @@ extends Node2D
 		speedScale = value;
 
 @export var curve: Curve2D = Curve2D.new()
+
+@export var modelTint: Color = Color.RED:
+	set(val):
+		modelTint = val;
+@export_range(0, 1, 0.1) var modelTintFactor:
+	set(val):
+		modelTintFactor = val;
+
+var truckModel;
 
 var roadmap: RoadMap
 var requiredNodes: Array[Intersection] = []
@@ -40,7 +42,7 @@ const INTERACTION_DISTANCE = 10
 const DROP_DISTANCE = 30
 
 func renderedPosition():
-	var childSprite = self.get_node("Path/spriteFollow/personSprite");
+	var childSprite = self.get_node("Path/spriteFollow/truckSprite");
 	return childSprite.global_position;
 
 # Called when the node enters the scene tree for the first time.
@@ -49,8 +51,12 @@ func _ready():
 	self.roadmap = get_tree().get_first_node_in_group('roadmap')
 	self.progress_ratio = self.progress_ratio;
 	setCurve(curve)
+	self.truckModel = $Path/spriteFollow/truckSprite
 
 func _process(delta):
+	if truckModel:
+		truckModel.modelTint = modelTint;
+		truckModel.modelTintFactor = modelTintFactor;
 	if !Engine.is_editor_hint():
 		delta = delta * control_speed_scale;
 		if should_pause:

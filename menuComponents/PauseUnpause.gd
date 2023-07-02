@@ -17,8 +17,3 @@ func _toggled(button_pressed):
 		self.text = "Pause"
 	for c in self.controlledCouriers:
 		c.should_pause = self.isPaused;
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-
-	pass

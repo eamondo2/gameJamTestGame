@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://yfsv8xkxrq4l"]
+
+[ext_resource type="Script" path="res://menuComponents/mainMenu/levelSelectList.gd" id="1_anxrc"]
+
+[node name="mainMenu" type="Node2D"]
+
+[node name="menuRoot" type="VBoxContainer" parent="."]
+offset_right = 584.0
+offset_bottom = 500.0
+
+[node name="levelSelectList" type="ItemList" parent="menuRoot"]
+layout_mode = 2
+script = ExtResource("1_anxrc")
