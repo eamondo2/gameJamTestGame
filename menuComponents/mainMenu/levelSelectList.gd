@@ -6,7 +6,7 @@ class LevelEntry:
 	var icon: Texture2D
 	var levelName: String
 	var levelDir: String
-	var packedScene: PackedScene
+	var scenePath: String
 
 
 var loadedLevels: Array[LevelEntry] = [];
@@ -33,10 +33,9 @@ func enumerateLevels():
 		var sceneDetails = FileAccess.open("res://levels/" + levelDir + "/" + levelDir + ".txt", FileAccess.READ).get_as_text()
 		if self.loadedLevels.any(func(v): v.levelName == sceneDetails.split("\n")[0]):
 			continue
-		var loadedScene = ResourceLoader.load("res://levels/" + levelDir + "/" + levelDir + ".tscn");
 		var entryObject = LevelEntry.new();
-		entryObject.packedScene = loadedScene
 		entryObject.levelDir = "res://levels/" + levelDir;
+		entryObject.scenePath = "res://levels/" + levelDir + "/" + levelDir + ".tscn"
 		entryObject.icon = ResourceLoader.load("res://levels/" + levelDir + "/" + levelDir + ".svg");
 		entryObject.levelName = sceneDetails.split("\n")[0];
 		loadedLevels.append(entryObject);
@@ -66,5 +65,6 @@ func _on_item_activated(index):
 	print(index)
 	for loadedScene in self.loadedLevels:
 		if loadedScene.levelName == self.get_item_text(index):
-			get_tree().change_scene_to_packed(loadedScene.packedScene);
+			var pScene = ResourceLoader.load(loadedScene.scenePath);
+			get_tree().change_scene_to_packed(pScene);
 			break
