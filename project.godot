@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Game Jam Test Game"
-run/main_scene="res://demoScene.tscn"
+run/main_scene="res://menuComponents/mainMenu/mainMenu.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
 config/icon="res://addons/roadBuilder/icon.svg"
 

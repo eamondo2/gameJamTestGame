@@ -51,7 +51,7 @@ func _ready():
 	self.roadmap = get_tree().get_first_node_in_group('roadmap')
 	self.progress_ratio = self.progress_ratio;
 	setCurve(curve)
-	self.truckModel = $Path/spriteFollow/truckSprite
+	self.truckModel = self.get_node("Path/spriteFollow/truckSprite");
 
 func _process(delta):
 	if truckModel:

@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://yfsv8xkxrq4l"]
+[gd_scene load_steps=5 format=3 uid="uid://yfsv8xkxrq4l"]
 
+[ext_resource type="Texture2D" uid="uid://2io3qsu0x1wc" path="res://levels/demoLevel1/demoLevel1.svg" id="1_1ft2a"]
 [ext_resource type="Script" path="res://menuComponents/mainMenu/levelSelectList.gd" id="1_anxrc"]
+[ext_resource type="Texture2D" uid="uid://dpslryseasshc" path="res://levels/demoLevel2/demoLevel2.svg" id="2_11sep"]
+[ext_resource type="Script" path="res://menuComponents/mainMenu/fixMenuView.gd" id="3_xx43v"]
 
 [node name="mainMenu" type="Node2D"]
 
@@ -10,4 +13,18 @@ offset_bottom = 500.0
 
 [node name="levelSelectList" type="ItemList" parent="menuRoot"]
 layout_mode = 2
+auto_height = true
+item_count = 2
+item_0/text = "Demo first level"
+item_0/icon = ExtResource("1_1ft2a")
+item_1/text = "Demo second level"
+item_1/icon = ExtResource("2_11sep")
 script = ExtResource("1_anxrc")
+
+[node name="Camera2D" type="Camera2D" parent="menuRoot"]
+anchor_mode = 0
+zoom = Vector2(2, 2)
+editor_draw_drag_margin = true
+script = ExtResource("3_xx43v")
+
+[connection signal="item_activated" from="menuRoot/levelSelectList" to="menuRoot/levelSelectList" method="_on_item_activated"]
