@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cukyyvvcaw157"]
 
-[ext_resource type="Script" path="res://PauseUnpause.gd" id="1_8jm46"]
-[ext_resource type="Script" path="res://SimSpeed.gd" id="2_hbme5"]
+[ext_resource type="Script" path="res://menuComponents/PauseUnpause.gd" id="1_8jm46"]
+[ext_resource type="Script" path="res://menuComponents/SimSpeed.gd" id="2_hbme5"]
 
 [node name="ControlSet" type="Control"]
 layout_mode = 3
