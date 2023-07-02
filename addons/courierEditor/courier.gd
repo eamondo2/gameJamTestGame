@@ -23,6 +23,8 @@ extends Node2D
 	set(val):
 		modelTintFactor = val;
 
+var truckModel;
+
 var roadmap: RoadMap
 var requiredNodes: Array[Intersection] = []
 var totalNodes: Array[Intersection] = []
@@ -49,10 +51,12 @@ func _ready():
 	self.roadmap = get_tree().get_first_node_in_group('roadmap')
 	self.progress_ratio = self.progress_ratio;
 	setCurve(curve)
+	self.truckModel = $Path/spriteFollow/truckSprite
 
 func _process(delta):
-	get_node("Path/spriteFollow/truckSprite").modelTint = modelTint;
-	get_node("Path/spriteFollow/truckSprite").modelTintFactor = modelTintFactor;
+	if truckModel:
+		truckModel.modelTint = modelTint;
+		truckModel.modelTintFactor = modelTintFactor;
 	if !Engine.is_editor_hint():
 		delta = delta * control_speed_scale;
 		if should_pause:

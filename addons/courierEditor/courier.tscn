@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://dlevjsmnm25f2"]
+[gd_scene load_steps=10 format=3 uid="uid://dlevjsmnm25f2"]
 
 [ext_resource type="Script" path="res://addons/courierEditor/courier.gd" id="1_ltfii"]
+[ext_resource type="Script" path="res://addons/courierEditor/particlePlacement.gd" id="3_ou5ok"]
 [ext_resource type="PackedScene" uid="uid://cxcygu42s7hqt" path="res://testTruckRender.tscn" id="3_tknde"]
 
 [sub_resource type="Curve2D" id="Curve2D_kpew4"]
@@ -10,17 +11,45 @@ _data = {
 }
 point_count = 13
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_bfvfy"]
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_y5ncl"]
 resource_local_to_scene = true
 blend_mode = 4
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_nlabi"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_cvrv1"]
 viewport_path = NodePath("SubViewport")
+
+[sub_resource type="Gradient" id="Gradient_80med"]
+offsets = PackedFloat32Array(0.293023, 0.513178, 0.812403)
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_f37na"]
+gradient = SubResource("Gradient_80med")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ne0hc"]
+lifetime_randomness = 0.4
+emission_shape = 2
+emission_sphere_radius = 1.74
+particle_flag_align_y = true
+particle_flag_disable_z = true
+direction = Vector3(0, -1, 0)
+spread = 24.01
+flatness = 0.06
+gravity = Vector3(0, -30, 0)
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_max = 9.75
+color = Color(0.858824, 0.858824, 0.858824, 1)
+color_ramp = SubResource("GradientTexture1D_f37na")
+turbulence_enabled = true
+sub_emitter_mode = 2
+sub_emitter_amount_at_end = 3
+sub_emitter_keep_velocity = true
 
 [node name="Courier" type="Node2D" groups=["courier"]]
 script = ExtResource("1_ltfii")
 curve = SubResource("Curve2D_kpew4")
-modelTintFactor = 0
+modelTint = Color(0.952941, 0.109804, 0.443137, 1)
+modelTintFactor = 1.0
 
 [node name="Path" type="Path2D" parent="."]
 curve = SubResource("Curve2D_kpew4")
@@ -30,7 +59,20 @@ position = Vector2(652.69, 237.615)
 rotates = false
 
 [node name="truckSprite" parent="Path/spriteFollow" instance=ExtResource("3_tknde")]
-material = SubResource("CanvasItemMaterial_bfvfy")
-texture = SubResource("ViewportTexture_nlabi")
-modelTint = Color(1, 0, 0, 1)
-modelTintFactor = 0
+z_index = 1
+material = SubResource("CanvasItemMaterial_y5ncl")
+texture = SubResource("ViewportTexture_cvrv1")
+modelTint = Color(0.952941, 0.109804, 0.443137, 1)
+modelTintFactor = 1.0
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Path/spriteFollow/truckSprite"]
+z_index = -1
+texture_filter = 1
+position = Vector2(-26.69, 0.384995)
+amount = 100
+process_material = SubResource("ParticleProcessMaterial_ne0hc")
+preprocess = 6.94
+explosiveness = 0.15
+randomness = 0.25
+trail_lifetime = 0.68
+script = ExtResource("3_ou5ok")
