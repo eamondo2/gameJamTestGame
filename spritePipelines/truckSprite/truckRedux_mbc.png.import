@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bwk8fua3kfn2k"
-path.s3tc="res://.godot/imported/truckRedux_mbc.png-e4614d0c315f3e52e79d8fb72cd8d8eb.s3tc.ctex"
+path.s3tc="res://.godot/imported/truckRedux_mbc.png-d07e0e9257da193c444934d7fc3ae036.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -12,8 +12,8 @@ generator_parameters={}
 
 [deps]
 
-source_file="res://truckRedux_mbc.png"
-dest_files=["res://.godot/imported/truckRedux_mbc.png-e4614d0c315f3e52e79d8fb72cd8d8eb.s3tc.ctex"]
+source_file="res://spritePipelines/truckSprite/truckRedux_mbc.png"
+dest_files=["res://.godot/imported/truckRedux_mbc.png-d07e0e9257da193c444934d7fc3ae036.s3tc.ctex"]
 
 [params]
 

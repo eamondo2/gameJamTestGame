@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://4lwmib87cwx3"
-path="res://.godot/imported/truckRedux.gltf-ae7f38700a7010c67250fedac20a5f0a.scn"
+path="res://.godot/imported/truckRedux.gltf-e09ba03a2142a0a5d86a59ad425ba6e8.scn"
 
 [deps]
 
-source_file="res://truckRedux.gltf"
-dest_files=["res://.godot/imported/truckRedux.gltf-ae7f38700a7010c67250fedac20a5f0a.scn"]
+source_file="res://spritePipelines/truckSprite/truckRedux.gltf"
+dest_files=["res://.godot/imported/truckRedux.gltf-e09ba03a2142a0a5d86a59ad425ba6e8.scn"]
 
 [params]
 

@@ -11,11 +11,11 @@ _data = {
 }
 point_count = 13
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_sjm2p"]
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_qpw26"]
 resource_local_to_scene = true
 blend_mode = 4
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_kihml"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_l30qg"]
 viewport_path = NodePath("SubViewport")
 
 [sub_resource type="Gradient" id="Gradient_80med"]
@@ -61,8 +61,8 @@ rotates = false
 [node name="truckSprite" parent="Path/spriteFollow" instance=ExtResource("3_tknde")]
 z_index = 1
 texture_filter = 1
-material = SubResource("CanvasItemMaterial_sjm2p")
-texture = SubResource("ViewportTexture_kihml")
+material = SubResource("CanvasItemMaterial_qpw26")
+texture = SubResource("ViewportTexture_l30qg")
 modelTint = Color(0.952941, 0.109804, 0.443137, 1)
 modelTintFactor = 1.0
 

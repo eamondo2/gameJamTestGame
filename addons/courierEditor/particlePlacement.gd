@@ -14,7 +14,6 @@ func _process(delta):
 	var distToParent = get_parent().position.distance_to(position)
 	var desiredTranslatePosition = translateToParent * distToParent
 	translate(desiredTranslatePosition + get_parent().position.direction_to(position).normalized() + invert_extend_vec * 1.25)
-	if !Engine.is_editor_hint():
-		var controlNode = get_tree().get_current_scene().get_node('ControlSet')
-		if controlNode.get_node("VBoxContainer/HScrollBar"):
-			self.speed_scale = controlNode.get_node("VBoxContainer/HScrollBar").value
+	var controlNode = get_tree().get_current_scene().get_node('ControlSet')
+	if controlNode.get_node("VBoxContainer/HScrollBar"):
+		self.speed_scale = controlNode.get_node("VBoxContainer/HScrollBar").value

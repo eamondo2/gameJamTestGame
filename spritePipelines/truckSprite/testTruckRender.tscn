@@ -1,21 +1,21 @@
 [gd_scene load_steps=13 format=3 uid="uid://cxcygu42s7hqt"]
 
-[ext_resource type="Script" path="res://testTruckRender.gd" id="1_gcbfj"]
-[ext_resource type="Script" path="res://cam.gd" id="1_qqwsx"]
-[ext_resource type="Shader" path="res://testTruckRender.gdshader" id="2_6cufp"]
-[ext_resource type="Texture2D" uid="uid://bwk8fua3kfn2k" path="res://truckRedux_mbc.png" id="2_r5dkt"]
+[ext_resource type="Script" path="res://spritePipelines/truckSprite/testTruckRender.gd" id="1_mhfgc"]
+[ext_resource type="Texture2D" uid="uid://bwk8fua3kfn2k" path="res://spritePipelines/truckSprite/truckRedux_mbc.png" id="2_v6ixo"]
+[ext_resource type="Script" path="res://cam.gd" id="3_oljkm"]
+[ext_resource type="Shader" path="res://spritePipelines/truckSprite/testTruckRender.gdshader" id="4_0gvvo"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_qko57"]
 resource_local_to_scene = true
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_tg7dq"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_5uwl4"]
 viewport_path = NodePath("SubViewport")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4g8wf"]
 resource_name = "Material"
 cull_mode = 2
 vertex_color_use_as_albedo = true
-albedo_texture = ExtResource("2_r5dkt")
+albedo_texture = ExtResource("2_v6ixo")
 roughness = 0.5
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_8bv47"]
@@ -56,7 +56,7 @@ size = Vector2(10, 10)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3iftk"]
 resource_local_to_scene = true
 render_priority = 0
-shader = ExtResource("2_6cufp")
+shader = ExtResource("4_0gvvo")
 shader_parameter/shadows_enabled = true
 shader_parameter/highlights_enabled = false
 shader_parameter/shadow_strength = 0.7
@@ -72,9 +72,10 @@ ambient_light_source = 3
 ambient_light_color = Color(0.72549, 0.494118, 0.635294, 1)
 
 [node name="Sprite2D" type="Sprite2D"]
+texture_filter = 3
 material = SubResource("CanvasItemMaterial_qko57")
-texture = SubResource("ViewportTexture_tg7dq")
-script = ExtResource("1_gcbfj")
+texture = SubResource("ViewportTexture_5uwl4")
+script = ExtResource("1_mhfgc")
 
 [node name="SubViewport" type="SubViewport" parent="."]
 own_world_3d = true
@@ -101,7 +102,7 @@ projection = 1
 current = true
 size = 3.0
 near = 0.003
-script = ExtResource("1_qqwsx")
+script = ExtResource("3_oljkm")
 
 [node name="Postprocess" type="MeshInstance3D" parent="SubViewport/Camera3D"]
 transform = Transform3D(3.3614, 0, 0, 0, 0.0084463, -2.97241, 0, 0.987613, 0.0254208, -0.0126231, -1.57356e-05, -1.02756)

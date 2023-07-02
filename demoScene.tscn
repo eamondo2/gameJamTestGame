@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://c204ohwgc2lbf"]
+[gd_scene load_steps=12 format=3 uid="uid://c204ohwgc2lbf"]
 
 [ext_resource type="TileSet" uid="uid://brp8lp0odh2rm" path="res://new_tile_set.tres" id="2_iupoa"]
 [ext_resource type="Script" path="res://addons/roadBuilder/roadMap.gd" id="2_jbyh1"]
@@ -11,19 +11,12 @@
 [ext_resource type="Texture2D" uid="uid://b1agbfxh7o3op" path="res://assets/kenney_tiny-dungeon/Tiles/tile_0089.png" id="11_lfdgu"]
 [ext_resource type="PackedScene" uid="uid://cukyyvvcaw157" path="res://menuComponents/ControlSet.tscn" id="13_sl5pp"]
 
-[sub_resource type="Curve2D" id="Curve2D_dorwn"]
+[sub_resource type="Curve2D" id="Curve2D_hrntl"]
 resource_local_to_scene = true
 _data = {
-"points": PackedVector2Array(0, 0, 22.7681, 2.0794, 424.274, 213.338, -22.7681, -2.0794, -22.866, 11.3327, 651.955, 234.132, 22.866, -11.3327, 20.0826, 4.18608, 423.295, 347.459, -20.0826, -4.18608, 24.7277, -7.87139, 624.121, 389.32, -24.7277, 7.87139, -2.44277, -17.8383, 871.398, 310.606, 2.44277, 17.8383, -22.9172, -1.71325, 846.97, 132.223, 22.9172, 1.71325, -19.3525, 9.82471, 617.799, 115.091, 19.3525, -9.82471, 0, 0, 424.274, 213.338)
+"points": PackedVector2Array(0, 0, 19.6396, 2.92123, 420.965, 360.207, -19.6396, -2.92123, 3.53115, -14.183, 617.361, 389.419, -3.53115, 14.183, -23.1708, 11.2618, 652.673, 247.589, 23.1708, -11.2618, 0, 0, 420.965, 360.207)
 }
-point_count = 8
-
-[sub_resource type="Curve2D" id="Curve2D_diklx"]
-resource_local_to_scene = true
-_data = {
-"points": PackedVector2Array(0, 0, 19.4842, 4.73069, 421.729, 343.729, -19.4842, -4.73069, 2.70334, -15.7685, 616.571, 391.036, -2.70334, 15.7685, 20.0931, -9.09164, 643.604, 233.351, -20.0931, 9.09164, -21.7763, -3.73097, 844.535, 142.435, 21.7763, 3.73097, -18.7618, 10.6324, 626.773, 105.125, 18.7618, -10.6324, -1.74259, 13.228, 439.155, 211.45, 1.74259, -13.228, 0, 0, 421.729, 343.729)
-}
-point_count = 7
+point_count = 4
 
 [node name="Node2D" type="Node2D"]
 
@@ -93,15 +86,11 @@ position = Vector2(646.525, 240.979)
 texture = ExtResource("6_u8c43")
 script = ExtResource("4_xcvnf")
 
-[node name="Courier" parent="." instance=ExtResource("10_38q0i")]
-curve = SubResource("Curve2D_dorwn")
-
-[node name="@Node2D@23091" parent="." instance=ExtResource("10_38q0i")]
-curve = SubResource("Curve2D_diklx")
-modelTint = Color(0.533333, 0.807843, 0, 1)
-
 [node name="ControlSet" parent="." instance=ExtResource("13_sl5pp")]
 offset_left = 304.0
 offset_top = 81.0
 offset_right = 304.0
 offset_bottom = 81.0
+
+[node name="Courier" parent="." instance=ExtResource("10_38q0i")]
+curve = SubResource("Curve2D_hrntl")

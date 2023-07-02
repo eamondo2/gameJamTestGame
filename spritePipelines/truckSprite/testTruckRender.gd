@@ -21,7 +21,7 @@ var lastTick = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	truckModel = $SubViewport/testTruck
+	truckModel = get_node("SubViewport/testTruck")
 	postProcObject = get_node("SubViewport/Camera3D/Postprocess")
 	pass # Replace with function body.
 
@@ -44,7 +44,7 @@ func _process(delta):
 	if get_tree().get_current_scene():
 		if !currentPos:
 			currentPos = get_parent().position
-	
+
 		lastPos = currentPos;
 		currentPos = get_parent().global_position
 		extend_vec = lastPos.direction_to(currentPos) * 20
