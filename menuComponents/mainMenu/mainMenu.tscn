@@ -1,32 +1,34 @@
 [gd_scene load_steps=6 format=3 uid="uid://yfsv8xkxrq4l"]
 
-[ext_resource type="Texture2D" uid="uid://2io3qsu0x1wc" path="res://levels/demoLevel1/demoLevel1.svg" id="1_1ft2a"]
 [ext_resource type="Script" path="res://menuComponents/mainMenu/levelSelectList.gd" id="1_anxrc"]
-[ext_resource type="Texture2D" uid="uid://dpslryseasshc" path="res://levels/demoLevel2/demoLevel2.svg" id="2_11sep"]
-[ext_resource type="Texture2D" uid="uid://dpvrlr1vdfml5" path="res://levels/demoLevel3/demoLevel3.svg" id="3_w31hp"]
+[ext_resource type="Texture2D" uid="uid://2io3qsu0x1wc" path="res://levels/demoLevel1/demoLevel1.svg" id="1_nd8b8"]
+[ext_resource type="Texture2D" uid="uid://dpslryseasshc" path="res://levels/demoLevel2/demoLevel2.svg" id="2_i3kbs"]
+[ext_resource type="Texture2D" uid="uid://dpvrlr1vdfml5" path="res://levels/demoLevel3/demoLevel3.svg" id="3_ltfcc"]
 [ext_resource type="Script" path="res://menuComponents/mainMenu/fixMenuView.gd" id="3_xx43v"]
 
 [node name="mainMenu" type="Node2D"]
 
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+editor_draw_drag_margin = true
+script = ExtResource("3_xx43v")
+
 [node name="menuRoot" type="VBoxContainer" parent="."]
-offset_right = 584.0
-offset_bottom = 500.0
+offset_left = 38.0
+offset_top = 48.0
+offset_right = 691.0
+offset_bottom = 452.0
 
 [node name="levelSelectList" type="ItemList" parent="menuRoot"]
 layout_mode = 2
 auto_height = true
 item_count = 3
 item_0/text = "Demo first level"
-item_0/icon = ExtResource("1_1ft2a")
+item_0/icon = ExtResource("1_nd8b8")
 item_1/text = "Demo second level"
-item_1/icon = ExtResource("2_11sep")
-item_2/text = "Demo second level"
-item_2/icon = ExtResource("3_w31hp")
+item_1/icon = ExtResource("2_i3kbs")
+item_2/text = "Demo third level"
+item_2/icon = ExtResource("3_ltfcc")
 script = ExtResource("1_anxrc")
-
-[node name="Camera2D" type="Camera2D" parent="menuRoot"]
-anchor_mode = 0
-editor_draw_drag_margin = true
-script = ExtResource("3_xx43v")
 
 [connection signal="item_activated" from="menuRoot/levelSelectList" to="menuRoot/levelSelectList" method="_on_item_activated"]

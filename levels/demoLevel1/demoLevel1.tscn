@@ -1,48 +1,76 @@
-[gd_scene load_steps=7 format=3 uid="uid://bp753oeu3lefm"]
+[gd_scene load_steps=12 format=3 uid="uid://bp753oeu3lefm"]
 
 [ext_resource type="PackedScene" uid="uid://c5t3hd330o3mu" path="res://levels/levelBase.tscn" id="1_luuh7"]
 [ext_resource type="Script" path="res://addons/roadBuilder/roadMap.gd" id="2_b4uau"]
-[ext_resource type="Texture2D" uid="uid://dkkv028dygv4u" path="res://assets/kenney_tiny-town/Tiles/tile_0083.png" id="3_l3d2d"]
 [ext_resource type="Script" path="res://addons/roadBuilder/intersection.gd" id="4_0o5a4"]
+[ext_resource type="Texture2D" uid="uid://cdylonkmnftv5" path="res://addons/roadBuilder/bag.png" id="5_s6mk3"]
 [ext_resource type="PackedScene" uid="uid://dlevjsmnm25f2" path="res://addons/courierEditor/courier.tscn" id="5_x5mxo"]
+[ext_resource type="Script" path="res://addons/roadBuilder/dropoff.gd" id="6_nnluk"]
+[ext_resource type="Texture2D" uid="uid://dkkv028dygv4u" path="res://addons/roadBuilder/signpost.png" id="7_byfiv"]
+[ext_resource type="Texture2D" uid="uid://dkkv028dygv4u" path="res://assets/kenney_tiny-town/Tiles/tile_0083.png" id="7_y3ycs"]
+[ext_resource type="Script" path="res://addons/courierEditor/package.gd" id="9_826th"]
+[ext_resource type="Texture2D" uid="uid://b1agbfxh7o3op" path="res://assets/kenney_tiny-dungeon/Tiles/tile_0089.png" id="10_2g0l7"]
 
-[sub_resource type="Curve2D" id="Curve2D_1g842"]
+[sub_resource type="Curve2D" id="Curve2D_jjx8i"]
 resource_local_to_scene = true
 _data = {
-"points": PackedVector2Array(0, 0, 6.00549, -20.3733, 380.285, 327.152, -6.00549, 20.3733, 48.1242, 6.31604, 440.34, 123.419, -48.1242, -6.31604, -24.7247, 31.0881, 921.582, 186.58, 24.7247, -31.0881, -29.405, -17.0308, 674.336, 497.46, 29.405, 17.0308, 0, 0, 380.285, 327.152)
+"points": PackedVector2Array(0, 0, 24.0524, 24.0547, 60.697, 184.453, -24.0524, -24.0547, 39.1342, -12.4698, 301.221, 425, -39.1342, 12.4698, 27.6541, 23.2776, 692.563, 300.302, -27.6541, -23.2776, -1.25274, -39.2582, 969.104, 533.078, 1.25274, 39.2582, -26.3726, 16.8879, 956.576, 140.496, 26.3726, -16.8879, -26.8468, -19.2175, 692.851, 309.375, 26.8468, 19.2175, -36.3686, 6.72529, 424.383, 117.2, 36.3686, -6.72529, 0, 0, 60.697, 184.453)
 }
-point_count = 5
+point_count = 8
 
 [node name="levelBase" instance=ExtResource("1_luuh7")]
 
-[node name="RoadMap" type="Node2D" parent="." index="1" node_paths=PackedStringArray("nodes") groups=["roadmap"]]
+[node name="levelBounds@RoadMap" type="Node2D" parent="." index="1" node_paths=PackedStringArray("nodes") groups=["roadmap"]]
 script = ExtResource("2_b4uau")
-nodes = [NodePath("@Sprite2D@26377"), NodePath("@Sprite2D@26378"), NodePath("@Sprite2D@26379"), NodePath("@Sprite2D@26380")]
-connections = Array[Array]([[false, true, true, true], [true, false, true, false], [true, true, false, true], [true, false, true, false]])
+nodes = [NodePath("@Sprite2D@26377"), NodePath("@Sprite2D@39647"), NodePath("@Sprite2D@39641"), NodePath("@Sprite2D@39642"), NodePath("@Sprite2D@39643"), NodePath("@Sprite2D@39646"), NodePath("@Sprite2D@39645")]
+connections = Array[Array]([[false, true, true, true, true, false, false], [true, false, true, true, false, false, false], [true, true, false, false, false, false, false], [true, true, false, false, true, false, false], [true, false, false, true, false, true, true], [false, false, false, false, true, false, true], [false, false, false, false, true, true, false]])
 
-[node name="@Sprite2D@26377" type="Sprite2D" parent="RoadMap" index="0"]
+[node name="@Sprite2D@26377" type="Sprite2D" parent="levelBounds@RoadMap" index="0"]
 texture_filter = 1
 position = Vector2(432.75, 124.75)
-texture = ExtResource("3_l3d2d")
+texture = ExtResource("7_y3ycs")
 script = ExtResource("4_0o5a4")
 
-[node name="@Sprite2D@26378" type="Sprite2D" parent="RoadMap" index="1"]
+[node name="@Sprite2D@39647" type="Sprite2D" parent="levelBounds@RoadMap" index="1"]
 texture_filter = 1
-position = Vector2(911.75, 183.75)
-texture = ExtResource("3_l3d2d")
-script = ExtResource("4_0o5a4")
+position = Vector2(64.9653, 178.629)
+texture = ExtResource("5_s6mk3")
+script = ExtResource("6_nnluk")
 
-[node name="@Sprite2D@26379" type="Sprite2D" parent="RoadMap" index="2"]
+[node name="@Sprite2D@39641" type="Sprite2D" parent="levelBounds@RoadMap" index="2"]
 texture_filter = 1
-position = Vector2(682.75, 491.75)
-texture = ExtResource("3_l3d2d")
+position = Vector2(286.962, 50.813)
+texture = ExtResource("7_byfiv")
 script = ExtResource("4_0o5a4")
 
-[node name="@Sprite2D@26380" type="Sprite2D" parent="RoadMap" index="3"]
+[node name="@Sprite2D@39642" type="Sprite2D" parent="levelBounds@RoadMap" index="3"]
 texture_filter = 1
-position = Vector2(378.75, 321.75)
-texture = ExtResource("3_l3d2d")
+position = Vector2(297.053, 419.126)
+texture = ExtResource("7_byfiv")
 script = ExtResource("4_0o5a4")
 
-[node name="Courier" parent="." index="2" instance=ExtResource("5_x5mxo")]
-curve = SubResource("Curve2D_1g842")
+[node name="@Sprite2D@39643" type="Sprite2D" parent="levelBounds@RoadMap" index="4"]
+texture_filter = 1
+position = Vector2(688.91, 306.446)
+texture = ExtResource("7_byfiv")
+script = ExtResource("4_0o5a4")
+
+[node name="@Sprite2D@39646" type="Sprite2D" parent="levelBounds@RoadMap" index="5"]
+texture_filter = 1
+position = Vector2(968.088, 541.896)
+texture = ExtResource("5_s6mk3")
+script = ExtResource("6_nnluk")
+
+[node name="@Sprite2D@39645" type="Sprite2D" parent="levelBounds@RoadMap" index="6"]
+texture_filter = 1
+position = Vector2(957.997, 133.221)
+texture = ExtResource("7_byfiv")
+script = ExtResource("4_0o5a4")
+
+[node name="levelBounds@Courier" parent="." index="2" instance=ExtResource("5_x5mxo")]
+curve = SubResource("Curve2D_jjx8i")
+
+[node name="levelBounds@Package" type="Node2D" parent="." index="3"]
+position = Vector2(693, 305)
+script = ExtResource("9_826th")
+texture = ExtResource("10_2g0l7")

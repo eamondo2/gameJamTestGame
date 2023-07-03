@@ -12,6 +12,6 @@ func _process(delta):
 	var invert_extend_vec = (parentSprite.extend_vec * -1)
 	var desiredTranslatePosition = parentSprite.position - position;
 	translate(desiredTranslatePosition + parentSprite.position.direction_to(position) + invert_extend_vec * 1.25)
-	var controlNode = get_tree().get_current_scene().get_node('ControlSet')
+	var controlNode = GlobalMenu.currentScene.get_node('ControlSet')
 	if controlNode.get_node("VBoxContainer/HScrollBar"):
 		self.speed_scale = controlNode.get_node("VBoxContainer/HScrollBar").value

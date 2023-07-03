@@ -13,7 +13,6 @@ func _process(delta):
 
 func _on_pressed():
 	print("pressed back to menu button")
-	var packedMainMenu = ResourceLoader.load("res://menuComponents/mainMenu/mainMenu.tscn");
-	var res = get_tree().change_scene_to_packed(packedMainMenu);
-	print(res)
+	GlobalMenu.swapToMenu()
+	
 	pass # Replace with function body.
