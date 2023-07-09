@@ -11,7 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://b1agbfxh7o3op" path="res://assets/kenney_tiny-dungeon/Tiles/tile_0089.png" id="11_lfdgu"]
 [ext_resource type="PackedScene" uid="uid://cukyyvvcaw157" path="res://menuComponents/ControlSet.tscn" id="13_sl5pp"]
 
-[sub_resource type="Curve2D" id="Curve2D_twd0k"]
+[sub_resource type="Curve2D" id="Curve2D_vn5uf"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 21.912, 6.05122, 653.92, 248.958, -21.912, -6.05122, -24.8331, 7.69127, 873.039, 309.471, 24.8331, -7.69127, 1.45293, -14.0287, 624.709, 386.383, -1.45293, 14.0287, 19.6669, -11.7725, 639.238, 246.097, -19.6669, 11.7725, -22.4916, -1.73343, 835.907, 128.371, 22.4916, 1.73343, -17.1529, 10.8088, 610.991, 111.037, 17.1529, -10.8088, -1.18062, 13.8795, 439.462, 219.125, 1.18062, -13.8795, 22.6264, -10.8962, 427.656, 357.92, -22.6264, 10.8962, 0, 0, 653.92, 248.958)
@@ -87,10 +87,10 @@ offset_right = 304.0
 offset_bottom = 84.0
 
 [node name="Courier" parent="." node_paths=PackedStringArray("requiredNodes") instance=ExtResource("10_38q0i")]
-curve = SubResource("Curve2D_twd0k")
+curve = SubResource("Curve2D_vn5uf")
 requiredNodes = [NodePath("../RoadMap/@Sprite2D@89975"), NodePath("../RoadMap/@Sprite2D@89973"), NodePath("../RoadMap/@Sprite2D@89970"), NodePath("../RoadMap/@Sprite2D@89974"), NodePath("../RoadMap/@Sprite2D@89967"), NodePath("../RoadMap/@Sprite2D@89972")]
 
-[node name="Package" type="Node2D" parent="." node_paths=PackedStringArray("targetLocation", "pairedPackage", "savedPairedPackage")]
+[node name="Package" type="Node2D" parent="." node_paths=PackedStringArray("targetLocation", "pairedPackage")]
 z_index = 2
 position = Vector2(619, 114)
 script = ExtResource("2_m86xa")
@@ -98,16 +98,14 @@ targetLocation = NodePath("../RoadMap/@Sprite2D@89973")
 texture = ExtResource("11_lfdgu")
 magnetic = true
 pairedPackage = NodePath("../PackagePair")
-savedPairedPackage = NodePath("../PackagePair")
 magneticRange = 420
 radiationRange = 260
 
-[node name="PackagePair" type="Node2D" parent="." node_paths=PackedStringArray("pairedPackage", "savedPairedPackage")]
+[node name="PackagePair" type="Node2D" parent="." node_paths=PackedStringArray("pairedPackage")]
 position = Vector2(433, 210)
 script = ExtResource("2_m86xa")
 texture = ExtResource("11_lfdgu")
 magnetic = true
 pairedPackage = NodePath("../Package")
-savedPairedPackage = NodePath("../Package")
 magneticRange = 420
 radiationRange = 260
