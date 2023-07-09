@@ -1,23 +1,22 @@
-[gd_scene load_steps=13 format=3 uid="uid://c204ohwgc2lbf"]
+[gd_scene load_steps=12 format=3 uid="uid://c204ohwgc2lbf"]
 
 [ext_resource type="TileSet" uid="uid://brp8lp0odh2rm" path="res://new_tile_set.tres" id="2_iupoa"]
 [ext_resource type="Script" path="res://addons/roadBuilder/roadMap.gd" id="2_jbyh1"]
+[ext_resource type="Script" path="res://addons/packageManager/package.gd" id="2_m86xa"]
 [ext_resource type="Script" path="res://addons/roadBuilder/intersection.gd" id="4_xcvnf"]
 [ext_resource type="Texture2D" uid="uid://dkkv028dygv4u" path="res://assets/kenney_tiny-town/Tiles/tile_0083.png" id="6_u8c43"]
 [ext_resource type="Script" path="res://addons/roadBuilder/dropoff.gd" id="7_mo5dj"]
 [ext_resource type="Texture2D" uid="uid://cdylonkmnftv5" path="res://assets/kenney_tiny-town/Tiles/tile_0107.png" id="8_larcd"]
-[ext_resource type="Script" path="res://addons/courierEditor/package.gd" id="10_0popg"]
 [ext_resource type="PackedScene" uid="uid://dlevjsmnm25f2" path="res://addons/courierEditor/courier.tscn" id="10_38q0i"]
-[ext_resource type="Script" path="res://addons/courierEditor/courier.gd" id="11_gx3rn"]
 [ext_resource type="Texture2D" uid="uid://b1agbfxh7o3op" path="res://assets/kenney_tiny-dungeon/Tiles/tile_0089.png" id="11_lfdgu"]
 [ext_resource type="PackedScene" uid="uid://cukyyvvcaw157" path="res://menuComponents/ControlSet.tscn" id="13_sl5pp"]
 
-[sub_resource type="Curve2D" id="Curve2D_snqoi"]
+[sub_resource type="Curve2D" id="Curve2D_twd0k"]
 resource_local_to_scene = true
 _data = {
-"points": PackedVector2Array(0, 0, 1.251, -12.8502, 425.661, 348.988, -1.251, 12.8502, 19.8511, 2.10508, 438.171, 220.486, -19.8511, -2.10508, -2.40939, 14.2733, 636.682, 241.537, 2.40939, -14.2733, -18.6927, -3.52814, 612.588, 384.27, 18.6927, 3.52814, 0, 0, 425.661, 348.988)
+"points": PackedVector2Array(0, 0, 21.912, 6.05122, 653.92, 248.958, -21.912, -6.05122, -24.8331, 7.69127, 873.039, 309.471, 24.8331, -7.69127, 1.45293, -14.0287, 624.709, 386.383, -1.45293, 14.0287, 19.6669, -11.7725, 639.238, 246.097, -19.6669, 11.7725, -22.4916, -1.73343, 835.907, 128.371, 22.4916, 1.73343, -17.1529, 10.8088, 610.991, 111.037, 17.1529, -10.8088, -1.18062, 13.8795, 439.462, 219.125, 1.18062, -13.8795, 22.6264, -10.8962, 427.656, 357.92, -22.6264, 10.8962, 0, 0, 653.92, 248.958)
 }
-point_count = 5
+point_count = 9
 
 [node name="Node2D" type="Node2D"]
 
@@ -34,18 +33,12 @@ layer_0/tile_data = PackedInt32Array(851997, 65537, 0, 917533, 65537, 0, 983069,
 position = Vector2(638, 259)
 scale = Vector2(0.25, 0.25)
 
-[node name="Package" type="Node2D" parent="."]
-z_index = 2
-position = Vector2(850, 158)
-script = ExtResource("10_0popg")
-texture = ExtResource("11_lfdgu")
-
 [node name="RoadMap" type="Node2D" parent="." node_paths=PackedStringArray("nodes") groups=["roadmap"]]
 script = ExtResource("2_jbyh1")
-nodes = [NodePath("@Sprite2D@89966"), NodePath("@Sprite2D@89967"), NodePath("@Sprite2D@89974"), NodePath("@Sprite2D@89973"), NodePath("@Sprite2D@89970"), NodePath("@Sprite2D@89972"), NodePath("@Sprite2D@89975")]
+nodes = [NodePath("@Sprite2D@57378"), NodePath("@Sprite2D@89967"), NodePath("@Sprite2D@89974"), NodePath("@Sprite2D@89973"), NodePath("@Sprite2D@89970"), NodePath("@Sprite2D@89972"), NodePath("@Sprite2D@89975")]
 connections = Array[Array]([[false, true, false, false, false, true, true], [true, false, true, false, false, false, true], [false, true, false, true, false, false, true], [false, false, true, false, true, false, true], [false, false, false, true, false, true, true], [true, false, false, false, true, false, true], [true, true, true, true, true, true, false]])
 
-[node name="@Sprite2D@89966" type="Sprite2D" parent="RoadMap"]
+[node name="@Sprite2D@57378" type="Sprite2D" parent="RoadMap"]
 texture_filter = 1
 position = Vector2(431.984, 210.784)
 texture = ExtResource("6_u8c43")
@@ -65,7 +58,7 @@ script = ExtResource("7_mo5dj")
 
 [node name="@Sprite2D@89973" type="Sprite2D" parent="RoadMap"]
 texture_filter = 1
-position = Vector2(881.196, 309.844)
+position = Vector2(882.372, 312.412)
 texture = ExtResource("8_larcd")
 script = ExtResource("7_mo5dj")
 
@@ -89,12 +82,32 @@ script = ExtResource("4_xcvnf")
 
 [node name="ControlSet" parent="." instance=ExtResource("13_sl5pp")]
 offset_left = 304.0
-offset_top = 81.0
+offset_top = 84.0
 offset_right = 304.0
-offset_bottom = 81.0
+offset_bottom = 84.0
 
-[node name="Courier" type="Node2D" parent="." groups=["courier"] instance=ExtResource("10_38q0i")]
-script = ExtResource("11_gx3rn")
-curve = SubResource("Curve2D_snqoi")
-modelTint = Color(0.952941, 0.109804, 0.443137, 1)
-modelTintFactor = 1.0
+[node name="Courier" parent="." node_paths=PackedStringArray("requiredNodes") instance=ExtResource("10_38q0i")]
+curve = SubResource("Curve2D_twd0k")
+requiredNodes = [NodePath("../RoadMap/@Sprite2D@89975"), NodePath("../RoadMap/@Sprite2D@89973"), NodePath("../RoadMap/@Sprite2D@89970"), NodePath("../RoadMap/@Sprite2D@89974"), NodePath("../RoadMap/@Sprite2D@89967"), NodePath("../RoadMap/@Sprite2D@89972")]
+
+[node name="Package" type="Node2D" parent="." node_paths=PackedStringArray("targetLocation", "pairedPackage", "savedPairedPackage")]
+z_index = 2
+position = Vector2(619, 114)
+script = ExtResource("2_m86xa")
+targetLocation = NodePath("../RoadMap/@Sprite2D@89973")
+texture = ExtResource("11_lfdgu")
+magnetic = true
+pairedPackage = NodePath("../PackagePair")
+savedPairedPackage = NodePath("../PackagePair")
+magneticRange = 420
+radiationRange = 260
+
+[node name="PackagePair" type="Node2D" parent="." node_paths=PackedStringArray("pairedPackage", "savedPairedPackage")]
+position = Vector2(433, 210)
+script = ExtResource("2_m86xa")
+texture = ExtResource("11_lfdgu")
+magnetic = true
+pairedPackage = NodePath("../Package")
+savedPairedPackage = NodePath("../Package")
+magneticRange = 420
+radiationRange = 260

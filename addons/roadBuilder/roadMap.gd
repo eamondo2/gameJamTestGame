@@ -57,7 +57,7 @@ func reset():
 func addNode(position: Vector2):
 	var node = Intersection.new()
 	node.position = position
-	add_child(node)
+	add_child(node, true)
 	node.owner = get_parent()
 	addConnections(node)
 	nodes.append(node)
