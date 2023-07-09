@@ -26,7 +26,7 @@ func _ready():
 	truckModel = get_node("SubViewport/testTruck")
 	postProcObject = get_node("SubViewport/Camera3D/Postprocess")
 	if !Engine.is_editor_hint():
-		controlNode = get_tree().get_current_scene().get_node('ControlSet')
+		controlNode = GlobalMenu.currentScene.get_node('ControlSet')
 	pass # Replace with function body.
 
 func _draw():
@@ -44,7 +44,7 @@ func _process(delta):
 		if controlNode.get_node("VBoxContainer/HScrollBar") and controlNode.get_node("VBoxContainer/HScrollBar").value <= 0.01:
 			return
 	
-	if get_tree().get_current_scene():
+	if GlobalMenu.currentScene:
 		if !currentPos:
 			currentPos = get_parent().position
 
