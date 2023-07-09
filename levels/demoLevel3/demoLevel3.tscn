@@ -3,5 +3,3 @@
 [ext_resource type="PackedScene" uid="uid://c5t3hd330o3mu" path="res://levels/levelBase.tscn" id="1_qyuru"]
 
 [node name="levelBase" instance=ExtResource("1_qyuru")]
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="1" groups=["audio"]]
