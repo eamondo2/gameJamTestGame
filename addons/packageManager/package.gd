@@ -103,7 +103,7 @@ var radiationRange: int = 100:
 			savedPairedPackage.queue_free()
 # This gets saved, in case one of the settings with a pair is turned off on accident.
 # It's not exported, since it doesn't need to be saved through reloads
-@export var savedPairedPackage: Package
+var savedPairedPackage: Package
 
 func _get_property_list():
 	var properties = []
