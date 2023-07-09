@@ -1,0 +1,82 @@
+[gd_scene load_steps=8 format=3 uid="uid://b3h05prbgrevd"]
+
+[ext_resource type="PackedScene" uid="uid://c5t3hd330o3mu" path="res://levels/levelBase.tscn" id="1_dpseb"]
+[ext_resource type="Script" path="res://addons/roadBuilder/roadMap.gd" id="2_le0wn"]
+[ext_resource type="Texture2D" uid="uid://dkkv028dygv4u" path="res://assets/kenney_tiny-town/Tiles/tile_0083.png" id="3_4kihq"]
+[ext_resource type="Script" path="res://addons/roadBuilder/intersection.gd" id="4_60qce"]
+[ext_resource type="PackedScene" uid="uid://dlevjsmnm25f2" path="res://addons/courierEditor/courier.tscn" id="5_fjdhv"]
+
+[sub_resource type="Curve2D" id="Curve2D_pvfih"]
+resource_local_to_scene = true
+_data = {
+"points": PackedVector2Array(0, 0, 16.3167, -18.0902, 110.748, 339.721, -16.3167, 18.0902, 38.743, -3.97906, 273.916, 158.82, -38.743, 3.97906, -33.4902, 14.1282, 661.346, 119.029, 33.4902, -14.1282, -2.90665, 25.8336, 326.444, 260.311, 2.90665, -25.8336, -18.6629, -17.8925, 297.378, 518.647, 18.6629, 17.8925, 0, 0, 110.748, 339.721)
+}
+point_count = 6
+
+[sub_resource type="Curve2D" id="Curve2D_msocx"]
+resource_local_to_scene = true
+_data = {
+"points": PackedVector2Array(0, 0, 1.23085, -27.4957, 302.169, 524.32, -1.23085, 27.4957, 34.6903, -12.8492, 314.477, 249.363, -34.6903, 12.8492, 17.0492, 19.0992, 661.381, 120.871, -17.0492, -19.0992, -15.8409, 19.7436, 831.872, 311.863, 15.8409, -19.7436, -37.1295, 1.50208, 673.463, 509.299, 37.1295, -1.50208, 0, 0, 302.169, 524.32)
+}
+point_count = 6
+
+[node name="levelBase" instance=ExtResource("1_dpseb")]
+
+[node name="RoadMap" type="Node2D" parent="." index="1" node_paths=PackedStringArray("nodes") groups=["roadmap"]]
+script = ExtResource("2_le0wn")
+nodes = [NodePath("@Sprite2D@24511"), NodePath("@Sprite2D@24512"), NodePath("@Sprite2D@24513"), NodePath("@Sprite2D@24514"), NodePath("@Sprite2D@24515"), NodePath("@Sprite2D@24516"), NodePath("@Sprite2D@24517"), NodePath("@Sprite2D@24518")]
+connections = Array[Array]([[false, true, false, false, true, false, false, false], [true, false, false, false, false, true, false, false], [false, false, false, true, false, true, false, true], [false, false, true, false, true, false, false, false], [true, false, false, true, false, false, true, false], [false, true, true, false, false, false, true, false], [false, false, false, false, true, true, false, true], [false, false, true, false, false, false, true, false]])
+
+[node name="@Sprite2D@24511" type="Sprite2D" parent="RoadMap" index="0"]
+texture_filter = 1
+position = Vector2(264.702, 149.986)
+texture = ExtResource("3_4kihq")
+script = ExtResource("4_60qce")
+
+[node name="@Sprite2D@24512" type="Sprite2D" parent="RoadMap" index="1"]
+texture_filter = 1
+position = Vector2(120.539, 330.189)
+texture = ExtResource("3_4kihq")
+script = ExtResource("4_60qce")
+
+[node name="@Sprite2D@24513" type="Sprite2D" parent="RoadMap" index="2"]
+texture_filter = 1
+position = Vector2(667.823, 513.062)
+texture = ExtResource("3_4kihq")
+script = ExtResource("4_60qce")
+
+[node name="@Sprite2D@24514" type="Sprite2D" parent="RoadMap" index="3"]
+texture_filter = 1
+position = Vector2(822.665, 315.506)
+texture = ExtResource("3_4kihq")
+script = ExtResource("4_60qce")
+
+[node name="@Sprite2D@24515" type="Sprite2D" parent="RoadMap" index="4"]
+texture_filter = 1
+position = Vector2(658.479, 128.629)
+texture = ExtResource("3_4kihq")
+script = ExtResource("4_60qce")
+
+[node name="@Sprite2D@24516" type="Sprite2D" parent="RoadMap" index="5"]
+texture_filter = 1
+position = Vector2(304.747, 527.746)
+texture = ExtResource("3_4kihq")
+script = ExtResource("4_60qce")
+
+[node name="@Sprite2D@24517" type="Sprite2D" parent="RoadMap" index="6"]
+texture_filter = 1
+position = Vector2(322.1, 256.773)
+texture = ExtResource("3_4kihq")
+script = ExtResource("4_60qce")
+
+[node name="@Sprite2D@24518" type="Sprite2D" parent="RoadMap" index="7"]
+texture_filter = 1
+position = Vector2(626.443, 328.855)
+texture = ExtResource("3_4kihq")
+script = ExtResource("4_60qce")
+
+[node name="Courier" parent="." index="2" instance=ExtResource("5_fjdhv")]
+curve = SubResource("Curve2D_pvfih")
+
+[node name="@Node2D@26672" parent="." index="3" instance=ExtResource("5_fjdhv")]
+curve = SubResource("Curve2D_msocx")

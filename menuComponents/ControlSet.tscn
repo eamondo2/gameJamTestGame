@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://cukyyvvcaw157"]
+[gd_scene load_steps=4 format=3 uid="uid://cukyyvvcaw157"]
 
 [ext_resource type="Script" path="res://menuComponents/PauseUnpause.gd" id="1_8jm46"]
 [ext_resource type="Script" path="res://menuComponents/SimSpeed.gd" id="2_hbme5"]
+[ext_resource type="Script" path="res://menuComponents/BackToMenu.gd" id="3_2c58c"]
 
 [node name="ControlSet" type="Control"]
 layout_mode = 3
@@ -34,4 +35,10 @@ step = 0.01
 value = 1.0
 script = ExtResource("2_hbme5")
 
+[node name="Button" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Back to Menu"
+script = ExtResource("3_2c58c")
+
 [connection signal="scrolling" from="VBoxContainer/HScrollBar" to="VBoxContainer/HScrollBar" method="_on_scrolling"]
+[connection signal="pressed" from="VBoxContainer/Button" to="VBoxContainer/Button" method="_on_pressed"]
