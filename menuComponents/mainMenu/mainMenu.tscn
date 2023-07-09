@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://2io3qsu0x1wc" path="res://levels/demoLevel1/demoLevel1.svg" id="1_nd8b8"]
 [ext_resource type="Texture2D" uid="uid://dpslryseasshc" path="res://levels/demoLevel2/demoLevel2.svg" id="2_i3kbs"]
 [ext_resource type="Texture2D" uid="uid://dpvrlr1vdfml5" path="res://levels/demoLevel3/demoLevel3.svg" id="3_ltfcc"]
-[ext_resource type="Script" path="res://menuComponents/mainMenu/fixMenuView.gd" id="3_xx43v"]
+[ext_resource type="Script" path="res://menuComponents/mainMenu/quitGame.gd" id="6_ohb3o"]
 
 [node name="mainMenu" type="Node2D"]
 
@@ -24,9 +24,10 @@ item_2/text = "Demo third level"
 item_2/icon = ExtResource("3_ltfcc")
 script = ExtResource("1_anxrc")
 
-[node name="Camera2D" type="Camera2D" parent="menuRoot"]
-anchor_mode = 0
-editor_draw_drag_margin = true
-script = ExtResource("3_xx43v")
+[node name="quitGame" type="Button" parent="menuRoot"]
+layout_mode = 2
+text = "Quit Game"
+script = ExtResource("6_ohb3o")
 
 [connection signal="item_activated" from="menuRoot/levelSelectList" to="menuRoot/levelSelectList" method="_on_item_activated"]
+[connection signal="pressed" from="menuRoot/quitGame" to="menuRoot/quitGame" method="_on_pressed"]
