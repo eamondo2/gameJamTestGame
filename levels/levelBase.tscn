@@ -5,3 +5,5 @@
 [node name="levelBase" type="Node2D"]
 
 [node name="ControlSet" parent="." instance=ExtResource("1_rc6x7")]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." groups=["audio"]]
