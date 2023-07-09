@@ -137,6 +137,7 @@ func _set(property, value):
 					carriedBy.package = null
 					carriedBy = null
 				if radioactive and distance < radiationRange:
+					pairedPackage.destroy()
 					destroy()
 		else:
 			position = value # TODO, make this snap to intersections
@@ -157,15 +158,16 @@ func transparencyFunction(x):
 func _draw():
 	if targetLocation:
 		draw_circle(targetLocation.global_position-position, 10, Color.GREEN)
-	var distance = position.distance_to(pairedPackage.position)
-	if magnetic:
-		var transparency = transparencyFunction(distance/magneticRange)
-		draw_line(Vector2.ZERO, pairedPackage.position-position, Color(0, 0, 1, transparency), 3)
-	if radioactive:
-		var angle = Vector2.LEFT.angle_to(position-pairedPackage.position)
-		var transparency = transparencyFunction(radiationRange/distance)
-		# Render at half range, so that the curves overlap at the correct distance
-		draw_arc(Vector2.ZERO, radiationRange/2, angle - PI/16, angle + PI/16, 10,  Color(0, 1, 0, transparency), 3)
+	if pairedPackage:
+		var distance = position.distance_to(pairedPackage.position)
+		if magnetic:
+			var transparency = transparencyFunction(distance/magneticRange)
+			draw_line(Vector2.ZERO, pairedPackage.position-position, Color(0, 0, 1, transparency), 3)
+		if radioactive:
+			var angle = Vector2.LEFT.angle_to(position-pairedPackage.position)
+			var transparency = transparencyFunction(radiationRange/distance)
+			# Render at half range, so that the curves overlap at the correct distance
+			draw_arc(Vector2.ZERO, radiationRange/2, angle - PI/16, angle + PI/16, 10,  Color(0, 1, 0, transparency), 3)
 		
 
 func test():
@@ -219,4 +221,7 @@ func destroy():
 		carriedBy.dropTarget = null
 		carriedBy.package = null
 		carriedBy = null
+	var audio = get_tree().get_first_node_in_group('audio')
+	audio.stream = preload("res://assets/explosion.wav")
+	audio.play()
 	deactivate()

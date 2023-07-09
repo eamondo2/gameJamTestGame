@@ -68,9 +68,12 @@ func _process(delta):
 				# If we're near the package, set package
 				var packages = get_tree().get_nodes_in_group('packages')
 				for p in packages:
-					if (p.global_position - renderedPosition()).length() <= DROP_DISTANCE:
+					if p.carriedBy == null and (p.global_position - renderedPosition()).length() <= DROP_DISTANCE:
 						package = p
 						package.carriedBy = self
+						var audio = get_tree().get_first_node_in_group('audio')
+						audio.stream = preload("res://assets/pickup.wav")
+						audio.play()
 						break
 			else:
 				package.position = renderedPosition()

@@ -5,20 +5,20 @@
 [ext_resource type="Texture2D" uid="uid://dkkv028dygv4u" path="res://assets/kenney_tiny-town/Tiles/tile_0083.png" id="3_4kihq"]
 [ext_resource type="Script" path="res://addons/roadBuilder/intersection.gd" id="4_60qce"]
 [ext_resource type="PackedScene" uid="uid://dlevjsmnm25f2" path="res://addons/courierEditor/courier.tscn" id="5_fjdhv"]
-[ext_resource type="Texture2D" uid="uid://cdylonkmnftv5" path="res://addons/roadBuilder/bag.png" id="5_wk508"]
+[ext_resource type="Texture2D" uid="uid://cdylonkmnftv5" path="res://assets/kenney_tiny-town/Tiles/tile_0107.png" id="5_wk508"]
 [ext_resource type="Script" path="res://addons/roadBuilder/dropoff.gd" id="6_0g137"]
 [ext_resource type="Texture2D" uid="uid://be3hlnptwgq7g" path="res://assets/kenney_tiny-dungeon/Tiles/tile_0082.png" id="8_22baf"]
 [ext_resource type="Script" path="res://addons/packageManager/package.gd" id="9_7trho"]
 [ext_resource type="Texture2D" uid="uid://2e1vyy7scdyf" path="res://assets/kenney_tiny-dungeon/Tiles/tile_0074.png" id="10_0smaa"]
 
-[sub_resource type="Curve2D" id="Curve2D_aldjd"]
+[sub_resource type="Curve2D" id="Curve2D_uwjly"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 14.4977, -18.3627, 123.417, 331.949, -14.4977, 18.3627, 39.3024, -2.20449, 268.394, 148.322, -39.3024, 2.20449, -34.5147, 12.0679, 661.418, 126.277, 34.5147, -12.0679, -2.04962, 27.4574, 316.271, 246.956, 2.04962, -27.4574, -17.2358, -18.9582, 295.775, 521.531, 17.2358, 18.9582, 0, 0, 123.417, 331.949)
 }
 point_count = 6
 
-[sub_resource type="Curve2D" id="Curve2D_rjfo4"]
+[sub_resource type="Curve2D" id="Curve2D_nf4vi"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, -36.9806, 1.27612, 671.233, 518.005, 36.9806, -1.27612, 2.11487, -28.0809, 301.427, 530.767, -2.11487, 28.0809, 32.8344, -11.7189, 322.576, 249.958, -32.8344, 11.7189, 16.7721, 17.3388, 650.919, 132.769, -16.7721, -17.3388, -14.7408, 21.1849, 818.641, 306.156, 14.7408, -21.1849, 0, 0, 671.233, 518.005)
@@ -81,11 +81,11 @@ texture = ExtResource("3_4kihq")
 script = ExtResource("4_60qce")
 
 [node name="Courier" parent="." index="2" node_paths=PackedStringArray("requiredNodes") instance=ExtResource("5_fjdhv")]
-curve = SubResource("Curve2D_aldjd")
+curve = SubResource("Curve2D_uwjly")
 requiredNodes = [NodePath("../RoadMap/@Sprite2D@24512"), NodePath("../RoadMap/@Sprite2D@31104"), NodePath("../RoadMap/@Sprite2D@24516")]
 
 [node name="@Node2D@26672" parent="." index="3" node_paths=PackedStringArray("requiredNodes") instance=ExtResource("5_fjdhv")]
-curve = SubResource("Curve2D_rjfo4")
+curve = SubResource("Curve2D_nf4vi")
 requiredNodes = [NodePath("../RoadMap/@Sprite2D@24513"), NodePath("../RoadMap/@Sprite2D@24516"), NodePath("../RoadMap/@Sprite2D@31103"), NodePath("../RoadMap/@Sprite2D@31104"), null]
 
 [node name="Sprite2D" type="Sprite2D" parent="." index="4" node_paths=PackedStringArray("targetLocation", "pairedPackage")]
@@ -112,3 +112,5 @@ radioactive = true
 pairedPackage = NodePath("../Sprite2D")
 magneticRange = 100
 radiationRange = 100
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." index="6" groups=["audio"]]
