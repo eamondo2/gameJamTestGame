@@ -8,11 +8,21 @@
 
 [node name="mainMenu" type="Node2D"]
 
-[node name="menuRoot" type="VBoxContainer" parent="."]
-offset_right = 653.0
-offset_bottom = 404.0
+[node name="GridContainer" type="GridContainer" parent="."]
+offset_left = 619.0
+offset_top = 31.0
+offset_right = 1293.0
+offset_bottom = 1055.0
 
-[node name="levelSelectList" type="ItemList" parent="menuRoot"]
+[node name="PanelContainer" type="PanelContainer" parent="GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="menuRoot" type="VBoxContainer" parent="GridContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="levelSelectList" type="ItemList" parent="GridContainer/PanelContainer/menuRoot"]
 layout_mode = 2
 auto_height = true
 item_count = 3
@@ -24,10 +34,13 @@ item_2/text = "Demo third level"
 item_2/icon = ExtResource("3_ltfcc")
 script = ExtResource("1_anxrc")
 
-[node name="quitGame" type="Button" parent="menuRoot"]
+[node name="PanelContainer2" type="PanelContainer" parent="GridContainer"]
+layout_mode = 2
+
+[node name="quitGame" type="Button" parent="GridContainer/PanelContainer2"]
 layout_mode = 2
 text = "Quit Game"
 script = ExtResource("6_ohb3o")
 
-[connection signal="item_activated" from="menuRoot/levelSelectList" to="menuRoot/levelSelectList" method="_on_item_activated"]
-[connection signal="pressed" from="menuRoot/quitGame" to="menuRoot/quitGame" method="_on_pressed"]
+[connection signal="item_activated" from="GridContainer/PanelContainer/menuRoot/levelSelectList" to="GridContainer/PanelContainer/menuRoot/levelSelectList" method="_on_item_activated"]
+[connection signal="pressed" from="GridContainer/PanelContainer2/quitGame" to="GridContainer/PanelContainer2/quitGame" method="_on_pressed"]
