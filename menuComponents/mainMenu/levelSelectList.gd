@@ -20,8 +20,6 @@ func _process(delta):
 
 
 func _on_item_activated(index):
-	pass # Replace with function body.
-	print(index)
 	for loadedScene in GlobalMenu.loadedLevels:
 		if loadedScene.levelName == self.get_item_text(index):
 			GlobalMenu.swapToScene(loadedScene, true)

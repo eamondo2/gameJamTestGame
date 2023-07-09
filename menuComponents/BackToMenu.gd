@@ -12,7 +12,5 @@ func _process(delta):
 
 
 func _on_pressed():
-	print("pressed back to menu button")
 	GlobalMenu.swapToMenu()
-	
 	pass # Replace with function body.

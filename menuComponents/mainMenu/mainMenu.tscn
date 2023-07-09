@@ -8,16 +8,9 @@
 
 [node name="mainMenu" type="Node2D"]
 
-[node name="Camera2D" type="Camera2D" parent="."]
-anchor_mode = 0
-editor_draw_drag_margin = true
-script = ExtResource("3_xx43v")
-
 [node name="menuRoot" type="VBoxContainer" parent="."]
-offset_left = 38.0
-offset_top = 48.0
-offset_right = 691.0
-offset_bottom = 452.0
+offset_right = 653.0
+offset_bottom = 404.0
 
 [node name="levelSelectList" type="ItemList" parent="menuRoot"]
 layout_mode = 2
@@ -30,5 +23,10 @@ item_1/icon = ExtResource("2_i3kbs")
 item_2/text = "Demo third level"
 item_2/icon = ExtResource("3_ltfcc")
 script = ExtResource("1_anxrc")
+
+[node name="Camera2D" type="Camera2D" parent="menuRoot"]
+anchor_mode = 0
+editor_draw_drag_margin = true
+script = ExtResource("3_xx43v")
 
 [connection signal="item_activated" from="menuRoot/levelSelectList" to="menuRoot/levelSelectList" method="_on_item_activated"]

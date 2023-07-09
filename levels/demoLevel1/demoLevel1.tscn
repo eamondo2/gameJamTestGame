@@ -1,17 +1,16 @@
-[gd_scene load_steps=12 format=3 uid="uid://bp753oeu3lefm"]
+[gd_scene load_steps=11 format=3 uid="uid://bp753oeu3lefm"]
 
 [ext_resource type="PackedScene" uid="uid://c5t3hd330o3mu" path="res://levels/levelBase.tscn" id="1_luuh7"]
 [ext_resource type="Script" path="res://addons/roadBuilder/roadMap.gd" id="2_b4uau"]
 [ext_resource type="Script" path="res://addons/roadBuilder/intersection.gd" id="4_0o5a4"]
-[ext_resource type="Texture2D" uid="uid://cdylonkmnftv5" path="res://addons/roadBuilder/bag.png" id="5_s6mk3"]
+[ext_resource type="Texture2D" uid="uid://cdylonkmnftv5" path="res://assets/kenney_tiny-town/Tiles/tile_0107.png" id="5_s6mk3"]
 [ext_resource type="PackedScene" uid="uid://dlevjsmnm25f2" path="res://addons/courierEditor/courier.tscn" id="5_x5mxo"]
 [ext_resource type="Script" path="res://addons/roadBuilder/dropoff.gd" id="6_nnluk"]
-[ext_resource type="Texture2D" uid="uid://dkkv028dygv4u" path="res://addons/roadBuilder/signpost.png" id="7_byfiv"]
-[ext_resource type="Texture2D" uid="uid://dkkv028dygv4u" path="res://assets/kenney_tiny-town/Tiles/tile_0083.png" id="7_y3ycs"]
+[ext_resource type="Texture2D" uid="uid://dkkv028dygv4u" path="res://assets/kenney_tiny-town/Tiles/tile_0083.png" id="7_byfiv"]
 [ext_resource type="Script" path="res://addons/courierEditor/package.gd" id="9_826th"]
 [ext_resource type="Texture2D" uid="uid://b1agbfxh7o3op" path="res://assets/kenney_tiny-dungeon/Tiles/tile_0089.png" id="10_2g0l7"]
 
-[sub_resource type="Curve2D" id="Curve2D_jjx8i"]
+[sub_resource type="Curve2D" id="Curve2D_yvutj"]
 resource_local_to_scene = true
 _data = {
 "points": PackedVector2Array(0, 0, 24.0524, 24.0547, 60.697, 184.453, -24.0524, -24.0547, 39.1342, -12.4698, 301.221, 425, -39.1342, 12.4698, 27.6541, 23.2776, 692.563, 300.302, -27.6541, -23.2776, -1.25274, -39.2582, 969.104, 533.078, 1.25274, 39.2582, -26.3726, 16.8879, 956.576, 140.496, 26.3726, -16.8879, -26.8468, -19.2175, 692.851, 309.375, 26.8468, 19.2175, -36.3686, 6.72529, 424.383, 117.2, 36.3686, -6.72529, 0, 0, 60.697, 184.453)
@@ -28,7 +27,7 @@ connections = Array[Array]([[false, true, true, true, true, false, false], [true
 [node name="@Sprite2D@26377" type="Sprite2D" parent="levelBounds@RoadMap" index="0"]
 texture_filter = 1
 position = Vector2(432.75, 124.75)
-texture = ExtResource("7_y3ycs")
+texture = ExtResource("7_byfiv")
 script = ExtResource("4_0o5a4")
 
 [node name="@Sprite2D@39647" type="Sprite2D" parent="levelBounds@RoadMap" index="1"]
@@ -68,7 +67,7 @@ texture = ExtResource("7_byfiv")
 script = ExtResource("4_0o5a4")
 
 [node name="levelBounds@Courier" parent="." index="2" instance=ExtResource("5_x5mxo")]
-curve = SubResource("Curve2D_jjx8i")
+curve = SubResource("Curve2D_yvutj")
 
 [node name="levelBounds@Package" type="Node2D" parent="." index="3"]
 position = Vector2(693, 305)
