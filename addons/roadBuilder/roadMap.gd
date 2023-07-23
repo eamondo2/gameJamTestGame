@@ -16,7 +16,7 @@ var weightedConnections: Array[Variant] = []
 const INTERACTION_DISTANCE = 10
 
 func _enter_tree():
-	if get_tree().has_group("roadmap"):
+	if get_tree().has_group('roadmap'):
 		if get_tree().get_nodes_in_group('roadmap').any(func(v): return v != self):
 			print('Please only use 1 roadmap per scene')
 			self.queue_free()

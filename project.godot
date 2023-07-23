@@ -28,7 +28,7 @@ window/stretch/mode="canvas_items"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/courierEditor/plugin.cfg", "res://addons/roadBuilder/plugin.cfg")
+enabled=PackedStringArray("res://addons/courierEditor/plugin.cfg", "res://addons/packageManager/plugin.cfg", "res://addons/roadBuilder/plugin.cfg")
 
 [filesystem]
 

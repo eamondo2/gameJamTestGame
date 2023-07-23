@@ -11,6 +11,7 @@ const REQUIRED_DISTANCE = 20
 
 var delivered = false
 var active = true
+var homeNode: Intersection
 
 @export var texture: Texture2D:
 	set(value):
@@ -57,6 +58,8 @@ var magneticRange: int = 100:
 		magneticRange = value
 		if pairedPackage and pairedPackage.magneticRange != magneticRange:
 			pairedPackage.magneticRange = magneticRange
+			
+const MAGNET_THICKNESS = 5
 
 # Radioactive packages cannot be too close to their pair
 @export var radioactive: bool = false:
@@ -86,9 +89,6 @@ var radiationRange: int = 100:
 		radiationRange = value
 		if pairedPackage and pairedPackage.radiationRange != radiationRange:
 			pairedPackage.radiationRange = radiationRange
-		
-# Contraband packages are chased by police (TODO)
-@export var contraband: bool = false
 
 @export var pairedPackage: Package:
 	set(value):
@@ -110,16 +110,21 @@ func _get_property_list():
 	properties.append({
 		"name": "magneticRange",
 		"type": TYPE_INT,
-		"usage": PROPERTY_USAGE_DEFAULT if magnetic else PROPERTY_USAGE_NO_EDITOR, # See above assignment.
+		"usage": PROPERTY_USAGE_DEFAULT if magnetic else PROPERTY_USAGE_NO_EDITOR,
 		"hint": PROPERTY_HINT_RANGE,
 		"hint_string": "0,1000,10,or_greater"
 	})
 	properties.append({
 		"name": "radiationRange",
 		"type": TYPE_INT,
-		"usage": PROPERTY_USAGE_DEFAULT if radioactive else PROPERTY_USAGE_NO_EDITOR, # See above assignment.
+		"usage": PROPERTY_USAGE_DEFAULT if radioactive else PROPERTY_USAGE_NO_EDITOR, 
 		"hint": PROPERTY_HINT_RANGE,
 		"hint_string": "0,1000,10,or_greater"
+	})
+	properties.append({
+		"name": "homeNode",
+		"type": TYPE_OBJECT,
+		"usage": PROPERTY_USAGE_NO_EDITOR, 
 	})
 	return properties
 		
@@ -132,16 +137,14 @@ func _set(property, value):
 			if pairedPackage:
 				var distance = position.distance_to(pairedPackage.position)
 				if magnetic and distance > magneticRange:
-					# Force self to drop
-					carriedBy.dropTarget = null
-					carriedBy.package = null
-					carriedBy = null
+					pairedPackage.destroy()
+					destroy()
 				if radioactive and distance < radiationRange:
 					pairedPackage.destroy()
 					destroy()
 		else:
-			position = value # TODO, make this snap to intersections
-			print('overrided set!')
+			# This doesn't trigger on dragging it around, we'll have to use a plugin for it
+			position = value
 		return true
 	return false
 	
@@ -158,11 +161,12 @@ func transparencyFunction(x):
 func _draw():
 	if targetLocation:
 		draw_circle(targetLocation.global_position-position, 10, Color.GREEN)
-	if pairedPackage:
+	if pairedPackage and pairedPackage.active:
 		var distance = position.distance_to(pairedPackage.position)
 		if magnetic:
 			var transparency = transparencyFunction(distance/magneticRange)
-			draw_line(Vector2.ZERO, pairedPackage.position-position, Color(0, 0, 1, transparency), 3)
+			var thickness = MAGNET_THICKNESS*(1-transparency)
+			draw_line(Vector2.ZERO, pairedPackage.position-position, Color(0, 0, 1, transparency), thickness)
 		if radioactive:
 			var angle = Vector2.LEFT.angle_to(position-pairedPackage.position)
 			var transparency = transparencyFunction(radiationRange/distance)
@@ -170,17 +174,18 @@ func _draw():
 			draw_arc(Vector2.ZERO, radiationRange/2, angle - PI/16, angle + PI/16, 10,  Color(0, 1, 0, transparency), 3)
 		
 
-func test():
-	print('change')
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	if !Engine.is_editor_hint():
 		deactivate()
 		spawnTimer=0
-	else:
-		savedPairedPackage = pairedPackage
 	queue_redraw()
+
+func _enter_tree():
+	if Engine.is_editor_hint():
+		savedPairedPackage = pairedPackage
+		activate()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -195,7 +200,7 @@ func _process(delta):
 	
 func activate():
 	print('activating')
-	add_to_group('packages')
+	add_to_group('packages', true)
 	active = true
 	show()
 	
@@ -224,4 +229,4 @@ func destroy():
 	var audio = get_tree().get_first_node_in_group('audio')
 	audio.stream = preload("res://assets/explosion.wav")
 	audio.play()
-	deactivate()
+	position = homeNode.position
