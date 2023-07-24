@@ -26,7 +26,7 @@ extends Node2D
 var truckModel;
 
 var roadmap: RoadMap
-var requiredNodes: Array[Intersection] = []
+@export var requiredNodes: Array[Intersection] = []
 var totalNodes: Array[Intersection] = []
 var dragging = false
 var selected = false
@@ -38,7 +38,7 @@ var should_pause = false;
 var control_speed_scale = 1;
 
 const PATH_WIGGLE = 20
-const INTERACTION_DISTANCE = 10
+const INTERACTION_DISTANCE = 30
 const DROP_DISTANCE = 30
 
 func renderedPosition():
@@ -68,14 +68,18 @@ func _process(delta):
 				# If we're near the package, set package
 				var packages = get_tree().get_nodes_in_group('packages')
 				for p in packages:
-					if (p.global_position - renderedPosition()).length() <= DROP_DISTANCE:
+					if p.carriedBy == null and (p.global_position - renderedPosition()).length() <= DROP_DISTANCE:
 						package = p
 						package.carriedBy = self
+						var audio = get_tree().get_first_node_in_group('audio')
+						audio.stream = preload("res://assets/pickup.wav")
+						audio.play()
 						break
 			else:
-				package.setPosition(renderedPosition())
-				if (dropTarget - renderedPosition()).length() < DROP_DISTANCE:
-					package.setPosition(dropTarget)
+				package.position = renderedPosition()
+				# have to check if drop target is set, since package could force a drop in line above
+				if dropTarget and (dropTarget - renderedPosition()).length() < DROP_DISTANCE:
+					package.position = dropTarget
 					package.carriedBy = null
 					dropTarget = null
 					package = null
@@ -83,11 +87,8 @@ func _process(delta):
 func _input(event):
 	if !Engine.is_editor_hint():
 		if event is InputEventMouseButton:
-			print('evt trigger')
 			if event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-				print('press and mbleft')
 				if (get_global_mouse_position() - renderedPosition()).length() < INTERACTION_DISTANCE:
-					print('press, within int.dist')
 					dragging = true
 				else:
 					dragging = false

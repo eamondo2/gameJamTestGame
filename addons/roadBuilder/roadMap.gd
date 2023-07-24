@@ -16,7 +16,7 @@ var weightedConnections: Array[Variant] = []
 const INTERACTION_DISTANCE = 10
 
 func _enter_tree():
-	if get_tree().has_group("roadmap"):
+	if get_tree().has_group('roadmap'):
 		if get_tree().get_nodes_in_group('roadmap').any(func(v): return v != self):
 			print('Please only use 1 roadmap per scene')
 			self.queue_free()
@@ -57,7 +57,7 @@ func reset():
 func addNode(position: Vector2):
 	var node = Intersection.new()
 	node.position = position
-	add_child(node)
+	add_child(node, true)
 	node.owner = get_parent()
 	addConnections(node)
 	nodes.append(node)

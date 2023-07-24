@@ -1,22 +1,26 @@
-[gd_scene load_steps=8 format=3 uid="uid://b3h05prbgrevd"]
+[gd_scene load_steps=12 format=3 uid="uid://b3h05prbgrevd"]
 
 [ext_resource type="PackedScene" uid="uid://c5t3hd330o3mu" path="res://levels/levelBase.tscn" id="1_dpseb"]
 [ext_resource type="Script" path="res://addons/roadBuilder/roadMap.gd" id="2_le0wn"]
 [ext_resource type="Texture2D" uid="uid://dkkv028dygv4u" path="res://assets/kenney_tiny-town/Tiles/tile_0083.png" id="3_4kihq"]
 [ext_resource type="Script" path="res://addons/roadBuilder/intersection.gd" id="4_60qce"]
 [ext_resource type="PackedScene" uid="uid://dlevjsmnm25f2" path="res://addons/courierEditor/courier.tscn" id="5_fjdhv"]
+[ext_resource type="Texture2D" uid="uid://cdylonkmnftv5" path="res://assets/kenney_tiny-town/Tiles/tile_0107.png" id="5_wk508"]
+[ext_resource type="Script" path="res://addons/roadBuilder/dropoff.gd" id="6_0g137"]
+[ext_resource type="Texture2D" uid="uid://c8pmdx3kxiqfp" path="res://assets/kenney_tiny-town/Tiles/tile_0130.png" id="9_05pp8"]
+[ext_resource type="Script" path="res://addons/packageManager/package.gd" id="9_7trho"]
 
-[sub_resource type="Curve2D" id="Curve2D_pvfih"]
+[sub_resource type="Curve2D" id="Curve2D_gr7y1"]
 resource_local_to_scene = true
 _data = {
-"points": PackedVector2Array(0, 0, 16.3167, -18.0902, 110.748, 339.721, -16.3167, 18.0902, 38.743, -3.97906, 273.916, 158.82, -38.743, 3.97906, -33.4902, 14.1282, 661.346, 119.029, 33.4902, -14.1282, -2.90665, 25.8336, 326.444, 260.311, 2.90665, -25.8336, -18.6629, -17.8925, 297.378, 518.647, 18.6629, 17.8925, 0, 0, 110.748, 339.721)
+"points": PackedVector2Array(0, 0, 14.4977, -18.3627, 123.417, 331.949, -14.4977, 18.3627, 39.3024, -2.20449, 268.394, 148.322, -39.3024, 2.20449, -34.5147, 12.0679, 661.418, 126.277, 34.5147, -12.0679, -2.04962, 27.4574, 316.271, 246.956, 2.04962, -27.4574, -17.2358, -18.9582, 295.775, 521.531, 17.2358, 18.9582, 0, 0, 123.417, 331.949)
 }
 point_count = 6
 
-[sub_resource type="Curve2D" id="Curve2D_msocx"]
+[sub_resource type="Curve2D" id="Curve2D_tv22s"]
 resource_local_to_scene = true
 _data = {
-"points": PackedVector2Array(0, 0, 1.23085, -27.4957, 302.169, 524.32, -1.23085, 27.4957, 34.6903, -12.8492, 314.477, 249.363, -34.6903, 12.8492, 17.0492, 19.0992, 661.381, 120.871, -17.0492, -19.0992, -15.8409, 19.7436, 831.872, 311.863, 15.8409, -19.7436, -37.1295, 1.50208, 673.463, 509.299, 37.1295, -1.50208, 0, 0, 302.169, 524.32)
+"points": PackedVector2Array(0, 0, -36.9806, 1.27612, 671.233, 518.005, 36.9806, -1.27612, 2.11487, -28.0809, 301.427, 530.767, -2.11487, 28.0809, 32.8344, -11.7189, 322.576, 249.958, -32.8344, 11.7189, 16.7721, 17.3388, 650.919, 132.769, -16.7721, -17.3388, -14.7408, 21.1849, 818.641, 306.156, 14.7408, -21.1849, 0, 0, 671.233, 518.005)
 }
 point_count = 6
 
@@ -24,7 +28,7 @@ point_count = 6
 
 [node name="RoadMap" type="Node2D" parent="." index="1" node_paths=PackedStringArray("nodes") groups=["roadmap"]]
 script = ExtResource("2_le0wn")
-nodes = [NodePath("@Sprite2D@24511"), NodePath("@Sprite2D@24512"), NodePath("@Sprite2D@24513"), NodePath("@Sprite2D@24514"), NodePath("@Sprite2D@24515"), NodePath("@Sprite2D@24516"), NodePath("@Sprite2D@24517"), NodePath("@Sprite2D@24518")]
+nodes = [NodePath("@Sprite2D@24511"), NodePath("@Sprite2D@24512"), NodePath("@Sprite2D@24513"), NodePath("@Sprite2D@31104"), NodePath("@Sprite2D@31103"), NodePath("@Sprite2D@24516"), NodePath("@Sprite2D@31102"), NodePath("@Sprite2D@24518")]
 connections = Array[Array]([[false, true, false, false, true, false, false, false], [true, false, false, false, false, true, false, false], [false, false, false, true, false, true, false, true], [false, false, true, false, true, false, false, false], [true, false, false, true, false, false, true, false], [false, true, true, false, false, false, true, false], [false, false, false, false, true, true, false, true], [false, false, true, false, false, false, true, false]])
 
 [node name="@Sprite2D@24511" type="Sprite2D" parent="RoadMap" index="0"]
@@ -45,17 +49,17 @@ position = Vector2(667.823, 513.062)
 texture = ExtResource("3_4kihq")
 script = ExtResource("4_60qce")
 
-[node name="@Sprite2D@24514" type="Sprite2D" parent="RoadMap" index="3"]
+[node name="@Sprite2D@31104" type="Sprite2D" parent="RoadMap" index="3"]
 texture_filter = 1
 position = Vector2(822.665, 315.506)
-texture = ExtResource("3_4kihq")
-script = ExtResource("4_60qce")
+texture = ExtResource("5_wk508")
+script = ExtResource("6_0g137")
 
-[node name="@Sprite2D@24515" type="Sprite2D" parent="RoadMap" index="4"]
+[node name="@Sprite2D@31103" type="Sprite2D" parent="RoadMap" index="4"]
 texture_filter = 1
 position = Vector2(658.479, 128.629)
-texture = ExtResource("3_4kihq")
-script = ExtResource("4_60qce")
+texture = ExtResource("5_wk508")
+script = ExtResource("6_0g137")
 
 [node name="@Sprite2D@24516" type="Sprite2D" parent="RoadMap" index="5"]
 texture_filter = 1
@@ -63,11 +67,11 @@ position = Vector2(304.747, 527.746)
 texture = ExtResource("3_4kihq")
 script = ExtResource("4_60qce")
 
-[node name="@Sprite2D@24517" type="Sprite2D" parent="RoadMap" index="6"]
+[node name="@Sprite2D@31102" type="Sprite2D" parent="RoadMap" index="6"]
 texture_filter = 1
 position = Vector2(322.1, 256.773)
-texture = ExtResource("3_4kihq")
-script = ExtResource("4_60qce")
+texture = ExtResource("5_wk508")
+script = ExtResource("6_0g137")
 
 [node name="@Sprite2D@24518" type="Sprite2D" parent="RoadMap" index="7"]
 texture_filter = 1
@@ -75,8 +79,32 @@ position = Vector2(626.443, 328.855)
 texture = ExtResource("3_4kihq")
 script = ExtResource("4_60qce")
 
-[node name="Courier" parent="." index="2" instance=ExtResource("5_fjdhv")]
-curve = SubResource("Curve2D_pvfih")
+[node name="Courier" parent="." index="2" node_paths=PackedStringArray("requiredNodes") instance=ExtResource("5_fjdhv")]
+curve = SubResource("Curve2D_gr7y1")
+requiredNodes = [NodePath("../RoadMap/@Sprite2D@24512"), NodePath("../RoadMap/@Sprite2D@31104"), NodePath("../RoadMap/@Sprite2D@24516")]
 
-[node name="@Node2D@26672" parent="." index="3" instance=ExtResource("5_fjdhv")]
-curve = SubResource("Curve2D_msocx")
+[node name="@Node2D@26672" parent="." index="3" node_paths=PackedStringArray("requiredNodes") instance=ExtResource("5_fjdhv")]
+curve = SubResource("Curve2D_tv22s")
+requiredNodes = [NodePath("../RoadMap/@Sprite2D@24513"), NodePath("../RoadMap/@Sprite2D@24516"), NodePath("../RoadMap/@Sprite2D@31103"), NodePath("../RoadMap/@Sprite2D@31104"), null]
+
+[node name="Package" type="Node2D" parent="." index="5" node_paths=PackedStringArray("pairedPackage") groups=["packages"]]
+position = Vector2(658.479, 128.629)
+script = ExtResource("9_7trho")
+texture = ExtResource("9_05pp8")
+radioactive = true
+pairedPackage = NodePath("../PackagePair")
+magneticRange = 100
+radiationRange = 100
+homeNode = Object(Sprite2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":1,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(658.479, 128.629),"rotation":0.0,"scale":Vector2(1, 1),"skew":0.0,"texture":ExtResource("5_wk508"),"centered":true,"offset":Vector2(0, 0),"flip_h":false,"flip_v":false,"hframes":1,"vframes":1,"frame":0,"region_enabled":false,"region_rect":Rect2(0, 0, 0, 0),"region_filter_clip_enabled":false,"script":ExtResource("6_0g137"))
+
+
+[node name="PackagePair" type="Node2D" parent="." index="6" node_paths=PackedStringArray("pairedPackage") groups=["packages"]]
+position = Vector2(304.747, 527.746)
+script = ExtResource("9_7trho")
+texture = ExtResource("9_05pp8")
+radioactive = true
+pairedPackage = NodePath("../Package")
+magneticRange = 100
+radiationRange = 100
+homeNode = Object(Sprite2D,"_import_path":NodePath(""),"unique_name_in_owner":false,"process_mode":0,"process_priority":0,"process_physics_priority":0,"process_thread_group":0,"editor_description":"","visible":true,"modulate":Color(1, 1, 1, 1),"self_modulate":Color(1, 1, 1, 1),"show_behind_parent":false,"top_level":false,"clip_children":0,"light_mask":1,"visibility_layer":1,"z_index":0,"z_as_relative":true,"y_sort_enabled":false,"texture_filter":1,"texture_repeat":0,"material":null,"use_parent_material":false,"position":Vector2(304.747, 527.746),"rotation":0.0,"scale":Vector2(1, 1),"skew":0.0,"texture":ExtResource("3_4kihq"),"centered":true,"offset":Vector2(0, 0),"flip_h":false,"flip_v":false,"hframes":1,"vframes":1,"frame":0,"region_enabled":false,"region_rect":Rect2(0, 0, 0, 0),"region_filter_clip_enabled":false,"script":ExtResource("4_60qce"))
+
